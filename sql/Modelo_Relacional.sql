@@ -8,7 +8,7 @@ CATEGORIA (id_categoria, nombre_cat)
 
 -- TABLA PRINCIPAL
 
-RECURSOS (PK id_recurso, nombre_rec, descripcion, version, fecha_subida, FK id_usuario, FK id_juego, FK id_categoria)
+RECURSOS (PK id_recurso, nombre_rec, descripcion, version, fecha_subida, num_descargas, FK id_usuario, FK id_juego, FK id_categoria)
 
 -- TABLAS DE INTERACCION
 
