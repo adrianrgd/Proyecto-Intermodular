@@ -1,0 +1,11 @@
+{
+  "git.ignoreLimitWarning": true,
+  "[sql]": {
+    "editor.formatOnSave": false
+  },
+  "editor.tokenColorCustomizations": {
+    "comments": "#acacac"
+  },
+  "editor.inlineSuggest.edits.renderSideBySide": "never",
+  "editor.inlineSuggest.edits.showLongDistanceHint": false
+}

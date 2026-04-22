@@ -1,58 +1,49 @@
 package app.src.com.modvalley;
 
 import app.src.com.modvalley.model.Usuario;
-import app.src.com.modvalley.view.MenuVista;
-import java.util.Scanner;
+import app.src.com.modvalley.controller.GestionController;
+import app.src.com.modvalley.view.Login;
+import app.src.com.modvalley.view.MenuUsuario;
+import app.src.com.modvalley.view.Catalogo;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        GestionController gestion = new GestionController();
 
-        // ArrayList de prueba para usuarios (Luego se obtendran de la BBDD)
-        ArrayList<Usuario> listaUsuarios = new ArrayList<>();
-        listaUsuarios.add(new Usuario(1, "Juanito_008", "juanelcrack@gmail.com"));
-        listaUsuarios.add(new Usuario(2, "Modder67", "modder67@gmail.com"));
-        listaUsuarios.add(new Usuario(3, "LuisitoComunica", "luisito@gmail.com"));
-        listaUsuarios.add(new Usuario(4, "ElColetas12", "elcoletas@gmail.com"));
-        listaUsuarios.add(new Usuario(5, "Paco_Perez", "pacoperez@gmail.com"));
+        Login login = new Login();
+        MenuUsuario menuUsuario = new MenuUsuario();
+        Catalogo catalogo = new Catalogo();
 
-        Usuario usuariologeado = null;
+        // Datos de prueba (Luego vendrán de la BBDD)
+        ArrayList<Usuario> usuarios = new ArrayList<>();
+        usuarios.add(new Usuario(1, "Adrian", "adrian@modvalley.com"));
 
-        while (usuariologeado == null) {
-            System.out.println("\n=== BIENVENIDO A MODVALLEY ===");
+        Usuario usuarioLogueado = null;
 
-            System.out.println("Selecciona un usuario para iniciar sesion: ");
-
-            for (Usuario u : listaUsuarios) {
-                System.out.println(u);
-            }
-            System.out.println("0 para Salir.");
-
-            System.out.println("Introduce el ID: ");
-            int idElejido = sc.nextInt();
-
-            if (idElejido == 0) {
-                System.out.println("Cerrando Programa");
-                return;
-            }
-
-            for (Usuario u : listaUsuarios) {
-                if (u.getIdUsuario() == idElejido) {
-                    usuariologeado = u;
-                    break;
+        while (true) {
+            if (usuarioLogueado == null) {
+                usuarioLogueado = login.mostrar(sc, usuarios);
+                if (usuarioLogueado == null)
+                    break; // Salida del programa
+            } else {
+                int opcion = menuUsuario.mostrar(sc, usuarioLogueado);
+                switch (opcion) {
+                    case 1:
+                        catalogo.mostrar(sc, gestion);
+                        break;
+                    case 2:
+                        System.out.println("Funcionalidad de subida...");
+                        break;
+                    case 3:
+                        usuarioLogueado = null;
+                        System.out.println("Sesión cerrada.");
+                        break;
                 }
             }
-
-            if (usuariologeado == null) {
-                System.out.println("Error! ID no valido.");
-            }
         }
-
-        MenuVista vista = new MenuVista();
-        vista.mostrarMenuPrincipal(usuariologeado);
-
         sc.close();
     }
-
 }
