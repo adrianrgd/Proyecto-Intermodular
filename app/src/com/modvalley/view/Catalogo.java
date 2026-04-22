@@ -1,8 +1,8 @@
-package app.src.com.modvalley.view;
+package com.modvalley.view;
 
-import app.src.com.modvalley.controller.GestionController;
-import app.src.com.modvalley.model.Videojuego;
-import app.src.com.modvalley.model.Recurso;
+import com.modvalley.model.Videojuego;
+import com.modvalley.model.Recurso;
+import com.modvalley.controller.GestionController;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -12,13 +12,13 @@ public class Catalogo {
         boolean enCatalogo = true;
 
         while (enCatalogo) {
-            System.out.println("=== CATÁLOGO ===");
+            System.out.println("=== CATÁLOGO DE JUEGOS ===");
             for (Videojuego v : gestion.juegos) {
                 System.out.println(v.getIdjuego() + ". " + v.getNombre_juego());
             }
 
             System.out.println("0 para volver al menu principal.");
-            System.out.println("ID del juego: ");
+            System.out.print("ID del juego: ");
             int idJuego = sc.nextInt();
 
             if (idJuego == 0) {
@@ -37,10 +37,12 @@ public class Catalogo {
             System.out.println("No hay mods disponibles para este juego.");
         } else {
             for (Recurso r : filtrados) {
-                System.out.println(r.getId() + ". " + r.getNombre() + " | Descargas: " + r.getDescargas());
+                System.out.println(r.getId() + ". " + r.getNombre() + " | Categoria: " + r.getIdCategoria()
+                        + " | Version: " + r.getVersion() + " | Descargas: " + r.getDescargas()
+                        + " | Autor: " + r.getIdAutor());
             }
-            System.out.println("0 para volver al menu principal.");
-            System.out.println("ID del mod: ");
+            System.out.println("Introduce '0' para volver al menu de juegos!");
+            System.out.print("ID del mod: ");
             int idMod = sc.nextInt();
             if (idMod != 0) {
                 for (Recurso r : gestion.mods) {

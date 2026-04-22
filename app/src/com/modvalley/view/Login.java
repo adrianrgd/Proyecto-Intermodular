@@ -1,6 +1,7 @@
-package app.src.com.modvalley.view;
+package com.modvalley.view;
 
-import app.src.com.modvalley.model.Usuario;
+import com.modvalley.model.Usuario;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,13 +13,13 @@ public class Login {
         for (Usuario u : listaUsuarios) {
             System.out.println(u);
         }
-        System.out.println("0 para Salir.");
+        System.out.println("Introduce '0' para Salir.");
 
-        System.out.println("Introduce el ID: ");
+        System.out.print("Introduce el ID del usuario: ");
         int idElejido = sc.nextInt();
 
         if (idElejido == 0) {
-            System.out.println("Cerrando Programa");
+            System.out.println("Cerrando Programa!");
             return null;
         }
 

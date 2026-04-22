@@ -1,10 +1,8 @@
-package app.src.com.modvalley;
+package com.modvalley;
 
-import app.src.com.modvalley.model.Usuario;
-import app.src.com.modvalley.controller.GestionController;
-import app.src.com.modvalley.view.Login;
-import app.src.com.modvalley.view.MenuUsuario;
-import app.src.com.modvalley.view.Catalogo;
+import com.modvalley.model.Usuario;
+import com.modvalley.controller.GestionController;
+import com.modvalley.view.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,6 +14,8 @@ public class Main {
         Login login = new Login();
         MenuUsuario menuUsuario = new MenuUsuario();
         Catalogo catalogo = new Catalogo();
+        PerfilMenu perfilMenu = new PerfilMenu();
+        SubirContenidoMenu subirContenidoMenu = new SubirContenidoMenu();
 
         // Datos de prueba (Luego vendrán de la BBDD)
         ArrayList<Usuario> usuarios = new ArrayList<>();
@@ -35,9 +35,11 @@ public class Main {
                         catalogo.mostrar(sc, gestion);
                         break;
                     case 2:
-                        System.out.println("Funcionalidad de subida...");
+                        subirContenidoMenu.mostrar(sc, gestion, usuarioLogueado);
                         break;
                     case 3:
+                        perfilMenu.mostrar(usuarioLogueado, gestion);
+                    case 4:
                         usuarioLogueado = null;
                         System.out.println("Sesión cerrada.");
                         break;

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir Contenido - ModValley</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/subir_contenido.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Lexend:wght@100..900&family=Peralta&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="" alt="">
+        </div>
+        <nav class="barra_navegacion">
+            <div class="enlaces">
+                <a href="index.html"><i class="fa-solid fa-house"></i> Inicio</a>
+                <a href="catalogo.html"><i class="fa-solid fa-book"></i> Catalogo</a>
+                <a href="subir_contenido.html"><i class="fa-solid fa-upload"></i> Subir Contenido</a>
+                <a href="perfil.html"><i class="fa-solid fa-user"></i> Perfil</a>
+            </div>
+        </nav>
+    </header>
+    <section class="subir_contenido">
+        <div class="contenedor_subir_contenido">
+            <h2>Sube Tu Propio Contenido</h2>
+
+            <div class="form_subir">
+                <form action="">
+                    <input type="text" placeholder="Nombre">
+                    <input type="text" placeholder="Descripcion">
+                    <label for="juego">Juego:</label>
+                    <select name="juego" id="juego">
+                        <option value="1">Minecraft Java</option>
+                        <option value="2">GTA V</option>
+                    </select>
+                    <label for="categoria">Categoria:</label>
+                    <select name="categoria" id="categoria">
+                        <option value="1">Textura</option>
+                        <option value="2">Mod</option>
+                        <option value="3">Mapa</option>
+                        <option value="4">Herramienta</option>
+                    </select>
+                    <input type="text" placeholder="Version">
+                    <label for="archivo">Archivo/Zip con el mod:</label>
+                    <input type="file" id="archivo" name="archivo">
+                    <button type="submit">Subir Mod</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

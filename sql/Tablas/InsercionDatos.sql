@@ -18,22 +18,22 @@ INSERT INTO VIDEOJUEGO (nombre_juego, genero, plataforma) VALUES
 ('Grand Theft Auto V', 'Acción', 'PC');
 
 INSERT INTO RECURSO (nombre_rec, descripcion, version, id_usuario, id_videojuego, id_categoria) VALUES
-('Aether', "Descripcion Temporal", "1.12.2", 1, 1, 2),
-('Sodium' 'Optimizacion y rendimiento al maximo!', '26.1.2', 2, 1, 4),
+('Aether', 'Descripcion Temporal', '1.12.2', 1, 1, 2),
+('Sodium', 'Optimizacion y rendimiento al maximo!', '26.1.2', 2, 1, 4),
 ('Xaero s Minimap', 'Minimapa y brújula para explorar el mundo', '26.1.2', 2, 1, 4),
 ('Fusion', 'Uso más recursos y unifica tus texturas!', '1.21.1', 2, 1, 1),
 ('Script Hook V', 'Mejora tu experiencia de juego con este mod!', 'Todas las versiones', 3, 2, 4),
 ('GTA V Remastered', 'Disfrute de un mapa mejorado!', 'Todas las versiones', 3, 2, 3),
 ('Simple Zombies', 'Agrega zombies a tu mundo!', 'Todas las versiones', 3, 2, 2);
 
-INSERT INTO DESCARGA (id_usuario, id_recurso) VALUES
-(1, 1),
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5),
-(6, 6),
-(7, 7);
+INSERT INTO DESCARGA (fecha_descarga, id_recurso) VALUES
+( NOW(), 1),
+( NOW(), 2),
+( NOW(), 3),
+( NOW(), 4),
+( NOW(), 5),
+( NOW(), 6),
+( NOW(), 7);
 
 INSERT INTO COMENTARIO (comentario, id_usuario, id_recurso) VALUES
 ('El mejor mod de la historia!', 1, 1),

@@ -14,7 +14,7 @@
       () => ({
         x: Math.random() * ancho,
         y: Math.random() * alto,
-        r: Math.random() * 2.1 + 1.2,
+        r: Math.random() * 3 + 1.5,
         vx: (Math.random() - 0.7) * 0.1,
         vy: (Math.random() - 0.7) * 0.1,
         c: PALETA[Math.floor(Math.random() * PALETA.length)],

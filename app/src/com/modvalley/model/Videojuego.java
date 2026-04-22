@@ -1,4 +1,4 @@
-package app.src.com.modvalley.model;
+package com.modvalley.model;
 
 public class Videojuego {
     private int idjuego;
