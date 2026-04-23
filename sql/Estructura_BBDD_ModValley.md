@@ -1,4 +1,4 @@
-# 🛡️ Documentación de Base de Datos: ModValley
+# Documentación de Base de Datos: ModValley
 
 ## 1. Plan de Estructura
 ModValley funciona como un ecosistema donde los **Videojuegos** son los contenedores principales. Cada **Recurso (Mod)** se clasifica obligatoriamente en un juego y en un tipo (Categoría). El sistema permite el seguimiento de interacciones (descargas, valoraciones y comentarios) vinculadas a los usuarios.

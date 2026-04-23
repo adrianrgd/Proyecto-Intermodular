@@ -1,42 +1,112 @@
 package com.modvalley.view;
 
-import com.modvalley.controller.GestionController;
-import com.modvalley.model.Usuario;
-import com.modvalley.model.Recurso;
+import com.modvalley.model.*;
+import com.modvalley.controller.*;
+import com.modvalley.Custom;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PerfilMenu {
-    public void mostrar(Usuario user, GestionController gestion) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("\n========= PERFIL =========");
-        System.out.println("Nickname: " + user.getNickname());
-        System.out.println("Email: " + user.getEmail());
 
-        int descargas = gestion.calcularDescargasTotales(user.getIdUsuario());
-        ArrayList<Recurso> misMods = gestion.obtenerModsPorAutor(user.getIdUsuario());
+    public void mostrar(Scanner sc, Usuario user, RecursoController recurso, JuegoControler juego,
+            InteraccionController interaccion) {
+        boolean enPerfil = true;
 
-        System.out.println("Descargas totales de tus mods: " + descargas);
-        System.out.println("Número de mods publicados: " + misMods.size());
-        System.out.println("\nMIS PUBLICACIONES:");
+        while (enPerfil) {
+            System.out.println(Custom.GRIS + "\n======" + Custom.CURSIVA
+                    + " Perfil de Usuario " + Custom.RESET + Custom.GRIS + "======" + Custom.RESET);
+            System.out.println(Custom.AMARILLO + "Nickname: " + user.getNickname() + Custom.RESET);
+            System.out.println(Custom.AMARILLO + "Email: " + user.getEmail() + Custom.RESET);
+            System.out.println(Custom.GRIS + "==============================\n" + Custom.RESET);
+            System.out.println(Custom.VERDE + "1. Ver mis Mods publicados" + Custom.RESET);
+            System.out.println(Custom.VERDE + "2. Ver mis Comentarios" + Custom.RESET);
+            System.out.println(Custom.VERDE + "3. Ver mis Valoraciones" + Custom.RESET);
+            System.out.println(Custom.ROJO + "0. Volver al panel principal" + Custom.RESET);
+            System.out.print(Custom.GRIS + "\nSelecciona una opcion: " + Custom.RESET);
 
-        if (misMods.isEmpty()) {
-            System.out.println("- Aún no has subido contenido.");
-        } else {
-            for (Recurso r : misMods) {
-                System.out.println("ID: " + r.getId() + " | Nombre: " + r.getNombre() + " | Categoría: "
-                        + gestion.categorias[r.getIdCategoria() - 1] + " | Juego: " + r.getIdJuego()
-                        + " | Descargas: " + r.getDescargas() + "\n");
+            int opcion = sc.nextInt();
+            sc.nextLine();
+            switch (opcion) {
+                case 1:
+                    mostrarMisMods(user, recurso, juego);
+                    pausar(sc);
+                    break;
+                case 2:
+                    mostrarMisComentarios(user, interaccion, recurso);
+                    pausar(sc);
+                    break;
+                case 3:
+                    mostrarMisValoraciones(user, interaccion, recurso);
+                    pausar(sc);
+                    break;
+                case 0:
+                    enPerfil = false;
+                    break;
+                default:
+                    System.out.println(Custom.ROJO + "Opcion no valida." + Custom.RESET);
+                    break;
             }
         }
-        System.out.println("¿Volver al menu principal? (S/N)");
-        String opcion = sc.nextLine();
-        if (opcion.equalsIgnoreCase("S")) {
-            MenuUsuario menuUsuario = new MenuUsuario();
-            menuUsuario.mostrar(sc, user);
-        } else {
-            sc.close();
-        }
+    }
 
+    private void mostrarMisMods(Usuario user, RecursoController recurso, JuegoControler juego) {
+        ArrayList<Recurso> misMods = recurso.filtrarPorAutor(user.getIdUsuario());
+        System.out.println(Custom.GRIS + "\n================== MODS PUBLICADOS ===================" + Custom.RESET);
+        if (misMods.isEmpty()) {
+            System.out.println(Custom.ROJO + "> No has subido ningun mod todavia." + Custom.RESET);
+        } else {
+            for (Recurso r : misMods) {
+                System.out.println(Custom.MAGENTA + "> " + Custom.AMARILLO + "["
+                        + juego.obtenerNombreJuego(r.getIdJuego()) + "] " + Custom.RESET + Custom.VERDE
+                        + r.getNombre() + Custom.GRIS + " | Descargas: " + Custom.VERDE + r.getDescargas()
+                        + Custom.RESET);
+            }
+            System.out.println(Custom.GRIS + "======================================================" + Custom.RESET);
+        }
+    }
+
+    private void mostrarMisComentarios(Usuario user, InteraccionController interaccion, RecursoController recurso) {
+        System.out.println(Custom.GRIS + "\n=============== MIS COMENTARIOS ===============" + Custom.RESET);
+        boolean hayComentarios = false;
+
+        for (Comentario c : interaccion.comentarios) {
+            if (c.getIdUsuario() == user.getIdUsuario()) {
+                Recurso r = recurso.obtenerModPorId(c.getIdRecurso());
+                String nombreMod = (r != null) ? r.getNombre() : "Mod Desconocido";
+
+                System.out.println(Custom.MAGENTA + "> " + Custom.AMARILLO + "[" + nombreMod + "] " + Custom.GRIS
+                        + Custom.VERDE + c.getComentario() + Custom.RESET);
+                hayComentarios = true;
+            }
+        }
+        System.out
+                .println(Custom.GRIS + "===============================================" + Custom.RESET);
+
+        if (!hayComentarios) {
+            System.out.println(Custom.ROJO + "> No has comentado en ningún mod." + Custom.RESET);
+        }
+    }
+
+    private void mostrarMisValoraciones(Usuario user, InteraccionController interaccion, RecursoController recurso) {
+        System.out.println(Custom.GRIS + "\n=============== MIS VALORACIONES ===============" + Custom.RESET);
+        boolean hayVal = false;
+        for (Valoracion v : interaccion.valoraciones) {
+            if (v.getIdUsuario() == user.getIdUsuario()) {
+                System.out.println(Custom.MAGENTA + "> " + Custom.AMARILLO + "["
+                        + recurso.obtenerModPorId(v.getIdRecurso()).getNombre() + "]" + Custom.GRIS
+                        + " | Puntuacion: "
+                        + Custom.VERDE + v.getPuntuacion() + Custom.RESET);
+                hayVal = true;
+            }
+        }
+        System.out.println(Custom.GRIS + "================================================" + Custom.RESET);
+
+        if (!hayVal)
+            System.out.println(Custom.ROJO + "> No has valorado ningun mod." + Custom.RESET);
+    }
+
+    private void pausar(Scanner sc) {
+        System.out.println(Custom.GRIS + "\n[ Pulsa ENTER para volver al Perfil ]" + Custom.RESET);
+        sc.nextLine();
     }
 }

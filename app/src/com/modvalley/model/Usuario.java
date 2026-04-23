@@ -1,5 +1,7 @@
 package com.modvalley.model;
 
+import com.modvalley.Custom;
+
 public class Usuario {
     private int idUsuario;
     private String nickname;
@@ -37,6 +39,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "ID: " + idUsuario + " | Nickname: " + nickname + " | Email: " + email;
+        return Custom.AMARILLO + "ID: " + idUsuario + " | Nickname: " + nickname + " | Email: " + email
+                + Custom.RESET;
     }
 }
