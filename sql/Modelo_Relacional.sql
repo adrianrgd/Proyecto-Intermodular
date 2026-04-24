@@ -2,7 +2,7 @@
 
 -- TABLAS NO DEPENDIENTES DE NADIE
 
-USUARIO (id_usuario, nickname, email, password)
+USUARIO (id_usuario, nickname, email, fecha_registro, biografia, foto_perfil)
 VIDEOJUEGO (id_juego, nombre_juego, genero, plataforma)
 CATEGORIA (id_categoria, nombre_cat)
 
@@ -12,6 +12,7 @@ RECURSOS (PK id_recurso, nombre_rec, descripcion, version, fecha_subida, FK id_u
 
 -- TABLAS DE INTERACCION
 
-DESCARGA (PK id_descarga, fecha_descarga, FK id_usuario, FK id_recurso)
+DESCARGA (PK id_descarga, fecha_descarga, num_descargas, FK id_usuario, FK id_recurso)
 COMENTARIO (PK id_comentario, comentario, fecha, FK ID_usuario, FK id_recurso)
 VALORACION (PK id_valoracion, puntuacion, FK id_usuario, FK id_recurso)
+

@@ -9,31 +9,49 @@ import java.util.ArrayList;
 
 import com.modvalley.config.Conexion;
 import com.modvalley.model.Usuario;
+import com.modvalley.Custom;
 
 public class UsuarioDAO {
 
-    // Para mostrar la lista en el Login
+    // Listado de usuarios para el login
     public ArrayList<Usuario> obtenerTodos() {
         ArrayList<Usuario> lista = new ArrayList<>();
         String sql = "SELECT * FROM USUARIO";
 
-        try (Connection conn = Conexion.conectar();
-                Statement stmt = conn.createStatement();
+        Connection conn = Conexion.conectar();
+
+        if (conn == null) {
+            System.out.println(
+                    Custom.ROJO + "Error: No se pudo establecer conexión para listar usuarios." + Custom.RESET);
+            return lista;
+        }
+
+        try (Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 lista.add(new Usuario(
                         rs.getInt("id_usuario"),
                         rs.getString("nickname"),
-                        rs.getString("email")));
+                        rs.getString("email"),
+                        rs.getDate("fecha_registro"),
+                        rs.getString("biografia"),
+                        rs.getString("foto_perfil")));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Error SQL: " + e.getMessage());
+        } finally {
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return lista;
     }
 
-    // Para validar el ID elegido
+    // Validación del ID elegido
     public Usuario buscarPorId(int id) {
         String sql = "SELECT * FROM USUARIO WHERE id_usuario = ?";
         try (Connection conn = Conexion.conectar();
@@ -43,7 +61,13 @@ public class UsuarioDAO {
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                return new Usuario(rs.getInt("id_usuario"), rs.getString("nickname"), rs.getString("email"));
+                return new Usuario(
+                        rs.getInt("id_usuario"),
+                        rs.getString("nickname"),
+                        rs.getString("email"),
+                        rs.getDate("fecha_registro"),
+                        rs.getString("biografia"),
+                        rs.getString("foto_perfil"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

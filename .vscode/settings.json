@@ -7,5 +7,9 @@
     "comments": "#acacac"
   },
   "editor.inlineSuggest.edits.renderSideBySide": "never",
-  "editor.inlineSuggest.edits.showLongDistanceHint": false
+  "editor.inlineSuggest.edits.showLongDistanceHint": false,
+  "java.project.referencedLibraries": [
+    "lib/**/*.jar",
+    "app/lib/mysql-connector-j-9.6.0.jar"
+  ]
 }
