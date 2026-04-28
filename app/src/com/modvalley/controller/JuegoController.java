@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.modvalley.dao.VideojuegoDAO;
 import com.modvalley.model.*;
 
-public class JuegoControler {
+public class JuegoController {
     private VideojuegoDAO juegoDAO = new VideojuegoDAO();
 
     public ArrayList<Videojuego> getJuegos() {

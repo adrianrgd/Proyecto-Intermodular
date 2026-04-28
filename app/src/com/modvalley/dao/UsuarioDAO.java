@@ -74,4 +74,16 @@ public class UsuarioDAO {
         }
         return null;
     }
+
+    public void ActualizarNickname(int id, String nuevoNickname) {
+        String sql = "UPDATE USUARIO SET nickname = ? WHERE id_usuario = ?";
+        try (Connection conn = Conexion.conectar();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, nuevoNickname);
+            pstmt.setInt(2, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -19,18 +19,18 @@ INSERT INTO VIDEOJUEGO (nombre_juego, genero, plataforma) VALUES
 ('Cities Skylines I', 'Simulación', 'PC');
 
 
-INSERT INTO RECURSO (nombre_rec, descripcion, version, num_descargas, fecha_descarga, fecha_subida, id_usuario, id_videojuego, id_categoria) VALUES
-('Aether', 'Un nuevo mundo en los cielos', '1.12.2', 0, NOW(), NOW(), 1, 1, 2),
-('Sodium', 'Optimizacion y rendimiento al maximo!', '26.1.2', 0, NOW(), NOW(), 2, 1, 4),
-('Xaero s Minimap', 'Minimapa y brújula para explorar el mundo', '26.1.2', 0, NOW(), NOW(), 2, 1, 4),
-('Fusion', 'Uso más recursos y unifica tus texturas!', '1.21.1', 0, NOW(), NOW(), 2, 1, 1),
-('Script Hook V', 'Mejora tu experiencia de juego con este mod!', 'Todas las versiones', 0, NOW(), NOW(), 3, 2, 4),
-('GTA V Remastered', 'Disfrute de un mapa mejorado!', 'Todas las versiones', 0, NOW(), NOW(), 3, 2, 3),
-('Simple Zombies', 'Agrega zombies a tu mundo!', 'Todas las versiones', 0, NOW(), NOW(), 3, 2, 2),
-('Move It', 'Herramienta para mover edificios y objetos', '1.20.1-f1', 0, NOW(), NOW(), 4, 3, 4),
-('Anarchy', 'Lo que quieras donde quieras!', '1.20.1-f1', 0, NOW(), NOW(), 4, 3, 4),
-('Better Industries', 'Mejora tus industrias!', '1.20.1-f1', 0, NOW(), NOW(), 4, 3, 4),
-('Sunrise', 'Mejora el shader del juego', '1.20.1-f1', 0, NOW(), NOW(), 4, 3, 1);
+INSERT INTO RECURSO (nombre_rec, descripcion, version, num_descargas, fecha_subida, id_usuario, id_videojuego, id_categoria) VALUES
+('Aether', 'Un nuevo mundo en los cielos', '1.12.2', 0, NOW(), 1, 1, 2),
+('Sodium', 'Optimizacion y rendimiento al maximo!', '26.1.2', 0, NOW(), 2, 1, 4),
+('Xaero s Minimap', 'Minimapa y brújula para explorar el mundo', '26.1.2', 0, NOW(), 2, 1, 4),
+('Fusion', 'Uso más recursos y unifica tus texturas!', '1.21.1', 0, NOW(), 2, 1, 1),
+('Script Hook V', 'Mejora tu experiencia de juego con este mod!', 'Todas las versiones', 0, NOW(), 3, 2, 4),
+('GTA V Remastered', 'Disfrute de un mapa mejorado!', 'Todas las versiones', 0, NOW(), 3, 2, 3),
+('Simple Zombies', 'Agrega zombies a tu mundo!', 'Todas las versiones', 0, NOW(), 3, 2, 2),
+('Move It', 'Herramienta para mover edificios y objetos', '1.20.1-f1', 0, NOW(), 4, 3, 4),
+('Anarchy', 'Lo que quieras donde quieras!', '1.20.1-f1', 0, NOW(), 4, 3, 4),
+('Better Industries', 'Mejora tus industrias!', '1.20.1-f1', 0, NOW(), 4, 3, 4), 
+('Sunrise', 'Mejora el shader del juego', '1.20.1-f1', 0, NOW(), 4, 3, 1);
 
 
 INSERT INTO COMENTARIO (comentario, id_usuario, id_recurso) VALUES

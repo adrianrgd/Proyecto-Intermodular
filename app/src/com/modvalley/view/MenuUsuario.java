@@ -11,7 +11,7 @@ public class MenuUsuario {
         System.out.println(Custom.GRIS + "\n==== Panel de " + Custom.CURSIVA + user.getNickname() + Custom.RESET
                 + Custom.GRIS + " ====" + Custom.RESET);
         System.out.println(Custom.VERDE + "1. Ver catalogo de mods" + Custom.RESET);
-        System.out.println(Custom.VERDE + "2. Subir contenido" + Custom.RESET);
+        System.out.println(Custom.VERDE + "2. Gestionar contenido" + Custom.RESET);
         System.out.println(Custom.VERDE + "3. Perfil" + Custom.RESET);
         System.out.println(Custom.ROJO + "4. Cerrar Sesion" + Custom.RESET);
         System.out.println(Custom.GRIS + "=========================" + Custom.RESET);

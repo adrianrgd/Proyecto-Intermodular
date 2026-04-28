@@ -9,6 +9,7 @@ public class Recurso {
     private int idVideojuego;
     private int idCategoria;
     private int idUsuario;
+    private double mediaValoracion;
 
     public Recurso(int id, String nombre, String descripcion, String version,
             int numDescargas, int idVideojuego, int idCategoria, int idUsuario) {
@@ -20,6 +21,14 @@ public class Recurso {
         this.idVideojuego = idVideojuego;
         this.idCategoria = idCategoria;
         this.idUsuario = idUsuario;
+    }
+
+    public double getMediaValoracion() {
+        return mediaValoracion;
+    }
+
+    public void setMediaValoracion(double mediaValoracion) {
+        this.mediaValoracion = mediaValoracion;
     }
 
     public int getIdUsuario() {

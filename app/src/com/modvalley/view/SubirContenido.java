@@ -1,17 +1,14 @@
 package com.modvalley.view;
 
-import com.modvalley.model.*;
 import com.modvalley.Custom;
+import com.modvalley.model.*;
 import com.modvalley.controller.*;
 
 import java.util.Scanner;
 
-public class SubirContenidoMenu {
+public class SubirContenido {
     public void mostrar(Scanner sc, RecursoController recurso, Usuario autor, JuegoController juego,
             CategoriaController categoriaCtrl) {
-        System.out.println(Custom.GRIS + "\n===== PUBLICAR UN MOD =====" + Custom.RESET);
-
-        // 1. Elegir Juego
         for (Videojuego v : juego.getJuegos()) {
             System.out.println(Custom.VERDE + v.getIdjuego() + ". " + v.getNombre_juego() + Custom.RESET);
         }
@@ -38,7 +35,7 @@ public class SubirContenidoMenu {
         System.out.print("Descripción: ");
         String desc = sc.nextLine();
 
-        Recurso nuevo = new Recurso(0, nombre, desc, version, 0, autor.getIdUsuario(), idJuego, catNum);
+        Recurso nuevo = new Recurso(0, nombre, desc, version, 0, idJuego, catNum, autor.getIdUsuario());
         recurso.subirMod(nuevo);
 
         System.out.println(Custom.VERDE + ">> ¡Mod guardado en la base de datos!" + Custom.RESET);

@@ -19,7 +19,7 @@ public class Main {
         MenuUsuario menuUsuario = new MenuUsuario();
         Catalogo catalogo = new Catalogo();
         PerfilMenu perfilMenu = new PerfilMenu();
-        SubirContenidoMenu subirMenu = new SubirContenidoMenu();
+        GestionarContenido GestionMenu = new GestionarContenido();
 
         Usuario usuarioLogueado = null;
 
@@ -32,13 +32,15 @@ public class Main {
                 int opcion = menuUsuario.mostrar(sc, usuarioLogueado);
                 switch (opcion) {
                     case 1:
-                        catalogo.mostrar(sc, juegoCtrl, recursoCtrl, interaccionCtrl, usuarioLogueado, categoriaCtrl);
+                        catalogo.mostrar(sc, juegoCtrl, recursoCtrl, interaccionCtrl, usuarioLogueado, categoriaCtrl,
+                                usuarioCtrl);
                         break;
                     case 2:
-                        subirMenu.mostrar(sc, recursoCtrl, usuarioLogueado, juegoCtrl, categoriaCtrl);
+                        GestionMenu.mostrar(sc, recursoCtrl, usuarioLogueado, juegoCtrl, categoriaCtrl);
                         break;
                     case 3:
-                        perfilMenu.mostrar(sc, usuarioLogueado, recursoCtrl, juegoCtrl, interaccionCtrl, categoriaCtrl);
+                        perfilMenu.mostrar(sc, usuarioLogueado, usuarioCtrl, recursoCtrl, juegoCtrl, interaccionCtrl,
+                                categoriaCtrl);
                         break;
                     case 4:
                         usuarioLogueado = null;

@@ -80,7 +80,6 @@ public class InteraccionDAO {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 lista.add(new Valoracion(
-                        rs.getInt("id_valoracion"),
                         rs.getInt("puntuacion"),
                         rs.getInt("id_recurso"),
                         rs.getInt("id_usuario")));
@@ -143,5 +142,24 @@ public class InteraccionDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<Valoracion> listarValoracionesPorUsuario(int idUser) {
+        ArrayList<Valoracion> lista = new ArrayList<>();
+        String sql = "SELECT * FROM VALORACION WHERE id_usuario = ?";
+        try (Connection conn = Conexion.conectar();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, idUser);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                lista.add(new Valoracion(
+                        rs.getInt("puntuacion"),
+                        rs.getInt("id_recurso"),
+                        rs.getInt("id_usuario")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
     }
 }

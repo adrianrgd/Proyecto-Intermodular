@@ -15,15 +15,11 @@ public class RecursoController {
         recursoDAO.incrementarDescarga(idMod);
     }
 
-    public String obtenerNickname(int idUsuario) {
-        return recursoDAO.obtenerNickname(idUsuario);
-    }
-
     public ArrayList<Recurso> filtrarPorAutor(int idUsuario) {
         return recursoDAO.filtrarPorAutor(idUsuario);
     }
 
-    public String nombreMod(int idMod) {
+    public String obtenerNombreMod(int idMod) {
         return recursoDAO.obtenerNombreMod(idMod);
     }
 
@@ -38,4 +34,9 @@ public class RecursoController {
     public Recurso obtenerModPorId(int idMod) {
         return null;
     }
+
+    public String obtenerFechaSubidaStr(int idMod) {
+        return recursoDAO.obtenerFechaSubidaStr(idMod);
+    }
+
 }

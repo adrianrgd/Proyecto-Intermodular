@@ -32,7 +32,6 @@ CREATE TABLE RECURSO (
     descripcion TEXT NOT NULL,
     version VARCHAR(20) NOT NULL,
     num_descargas INT DEFAULT 0,
-    fecha_descarga DATE DEFAULT (CURRENT_DATE),
     fecha_subida DATE DEFAULT (CURRENT_DATE),
     id_usuario INT,
     id_videojuego INT NOT NULL,

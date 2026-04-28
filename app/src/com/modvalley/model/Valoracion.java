@@ -5,7 +5,7 @@ public class Valoracion {
     private int idRecurso;
     private int idUsuario;
 
-    public Valoracion(int puntuacion, int idRecurso, int idUsuario, int idValoracion) {
+    public Valoracion(int puntuacion, int idRecurso, int idUsuario) {
         this.puntuacion = puntuacion;
         this.idRecurso = idRecurso;
         this.idUsuario = idUsuario;

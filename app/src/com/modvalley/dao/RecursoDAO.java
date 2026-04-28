@@ -22,9 +22,9 @@ public class RecursoDAO {
                         rs.getString("descripcion"),
                         rs.getString("version"),
                         rs.getInt("num_descargas"),
-                        rs.getInt("id_usuario"),
                         rs.getInt("id_videojuego"),
-                        rs.getInt("id_categoria")));
+                        rs.getInt("id_categoria"),
+                        rs.getInt("id_usuario")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -54,6 +54,18 @@ public class RecursoDAO {
             pstmt.setInt(4, r.getIdUsuario());
             pstmt.setInt(5, r.getIdVideojuego());
             pstmt.setInt(6, r.getIdCategoria());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void Eliminar(Recurso r) {
+        String sql = "DELETE FROM RECURSO WHERE id_recurso = ?";
+        try (Connection conn = Conexion.conectar();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, r.getId());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -116,21 +128,32 @@ public class RecursoDAO {
 
     public ArrayList<Recurso> filtrarPorJuego(int idVideojuego) {
         ArrayList<Recurso> lista = new ArrayList<>();
-        String sql = "SELECT * FROM RECURSO WHERE id_videojuego = ?";
+        String sql = "SELECT r.*, AVG(v.puntuacion) AS media_calculada " +
+                "FROM RECURSO r " +
+                "LEFT JOIN VALORACION v ON r.id_recurso = v.id_recurso " +
+                "WHERE r.id_videojuego = ? " +
+                "GROUP BY r.id_recurso";
+
         try (Connection conn = Conexion.conectar();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
             pstmt.setInt(1, idVideojuego);
             ResultSet rs = pstmt.executeQuery();
+
             while (rs.next()) {
-                lista.add(new Recurso(
+                Recurso r = new Recurso(
                         rs.getInt("id_recurso"),
                         rs.getString("nombre_rec"),
                         rs.getString("descripcion"),
                         rs.getString("version"),
                         rs.getInt("num_descargas"),
-                        rs.getInt("id_usuario"),
                         rs.getInt("id_videojuego"),
-                        rs.getInt("id_categoria")));
+                        rs.getInt("id_categoria"),
+                        rs.getInt("id_usuario"));
+
+                r.setMediaValoracion(rs.getDouble("media_calculada"));
+
+                lista.add(r);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -151,5 +174,21 @@ public class RecursoDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public String obtenerFechaSubidaStr(int idMod) {
+        String sql = "SELECT fecha_subida FROM RECURSO WHERE id_recurso = ?";
+        try (Connection conn = Conexion.conectar();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, idMod);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                Date fecha = rs.getDate("fecha_subida");
+                return (fecha != null) ? fecha.toString() : "Sin fecha";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "Error al obtener fecha";
     }
 }

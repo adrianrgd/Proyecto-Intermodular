@@ -15,10 +15,10 @@ public class UsuarioController {
 
     public String obtenerNickname(int idUsuario) {
         Usuario u = usuarioDAO.buscarPorId(idUsuario);
+        return u.getNickname();
+    }
 
-        if (u != null) {
-            return u.getNickname();
-        }
-        return "Desconocido";
+    public void actualizarNickname(int id, String nuevoNickname) {
+        usuarioDAO.ActualizarNickname(id, nuevoNickname);
     }
 }

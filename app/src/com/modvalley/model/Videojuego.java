@@ -1,12 +1,12 @@
 package com.modvalley.model;
 
 public class Videojuego {
-    private int idJuego;
-    private String nombreJuego;
+    private int idjuego;
+    private String nombre_juego;
     private String genero;
     private String plataforma;
 
-    public Videojuego(int idJuego, String nombreJuego, String genero, String plataforma) {
+    public Videojuego(int idjuego, String nombre_juego, String genero, String plataforma) {
         this.idjuego = idjuego;
         this.nombre_juego = nombre_juego;
         this.genero = genero;

@@ -35,45 +35,49 @@ public class Catalogo {
         boolean enMod = true;
         while (enMod) {
             ArrayList<Recurso> listaMods = recurso.getRecursos(idJuego);
-        System.out.println(
-                Custom.GRIS + "\n==============================" + Custom.AMARILLO + " Mods para "
-                        + Custom.CURSIVA + juego.obtenerNombreJuego(idJuego)
-                        + Custom.RESET
-                        + Custom.GRIS + " ==================================="
+            System.out.println(
+                    Custom.GRIS + "\n==============================" + Custom.AMARILLO + " Mods para "
+                            + Custom.CURSIVA + juego.obtenerNombreJuego(idJuego)
+                            + Custom.RESET
+                            + Custom.GRIS + " ==================================="
+                            + Custom.RESET);
+
+            if (listaMods.isEmpty()) {
+                System.out.println(Custom.ROJO + "> No hay contenido." + Custom.RESET);
+                return;
+            }
+
+            for (Recurso r : listaMods) {
+                String autor = usuarioCtrl.obtenerNickname(r.getIdUsuario());
+                String notaTxt = (r.getMediaValoracion() == 0) ? "N/C" : String.format("%.1f", r.getMediaValoracion());
+                System.out.println(Custom.CYAN + "[" + r.getId() + "] " + r.getNombre() + Custom.RESET +
+                        Custom.GRIS + " | Version: " + Custom.CYAN + r.getVersion() + Custom.RESET +
+                        Custom.GRIS + " | Autor: " + Custom.CYAN + autor + Custom.RESET +
+                        Custom.GRIS + " | Descargas: " + Custom.AMARILLO + r.getNumDescargas()
+                        + Custom.RESET +
+                        Custom.GRIS + " | Valoracion: " + Custom.AMARILLO + notaTxt
                         + Custom.RESET);
+            }
+            System.out.println(Custom.GRIS
+                    + "==========================================================================================="
+                    + Custom.RESET);
+            System.out.print(
+                    Custom.VERDE + "\nSelecciona un Mod [ID] " + Custom.ROJO + "(0 -> Volver)" + Custom.RESET + ": ");
+            int idMod = sc.nextInt();
+            sc.nextLine();
 
-        if (listaMods.isEmpty()) {
-            System.out.println(Custom.ROJO + "> No hay contenido." + Custom.RESET);
-            return;
+            if (idMod != 0)
+                menuInteraccionMod(sc, interaccion, usuarioCtrl, user, idMod, recurso);
+            else
+                enMod = false;
         }
-
-        for (Recurso r : listaMods) {
-            String autor = usuarioCtrl.obtenerNickname(r.getIdUsuario());
-            double media = interaccion.obtenerMedia(r.getId());
-            System.out.println(Custom.CYAN + "[" + r.getId() + "] " + r.getNombre() + Custom.RESET +
-                    Custom.GRIS + " | Version: " + Custom.CYAN + r.getVersion() + Custom.RESET +
-                    Custom.GRIS + " | Autor: " + Custom.CYAN + autor + Custom.RESET +
-                    Custom.GRIS + " | Descargas: " + Custom.AMARILLO + r.getNumDescargas()
-                    + Custom.RESET +
-                    Custom.GRIS + " | Valoracion: " + Custom.AMARILLO + String.format("%.1f", media) + Custom.RESET);
-        }
-        System.out.println(Custom.GRIS
-                + "==========================================================================================="
-                + Custom.RESET);
-        System.out.print(
-                Custom.VERDE + "\nSelecciona un Mod [ID] " + Custom.ROJO + "(0 -> Volver)" + Custom.RESET + ": ");
-        int idMod = sc.nextInt();
-        sc.nextLine();
-
-        if (idMod != 0)
-            menuInteraccionMod(sc, interaccion, usuario, user, idMod, recurso);
     }
 
     private void menuInteraccionMod(Scanner sc, InteraccionController interaccion, UsuarioController usuarioCtrl,
             Usuario user, int idMod, RecursoController recurso) {
         boolean enMod = true;
         while (enMod) {
-            String nombreMod = recurso.nombreMod(idMod);
+            String nombreMod = recurso.obtenerNombreMod(idMod);
             System.out.println(Custom.GRIS + "\nMod Seleccionado: " + Custom.CYAN
                     + nombreMod + Custom.RESET + Custom.GRIS);
             System.out.println(Custom.AMARILLO + "1. Descargar" + Custom.GRIS + " | " + Custom.AMARILLO
@@ -85,7 +89,7 @@ public class Catalogo {
 
             switch (opt) {
                 case 1:
-                    recurso.descargarMod(idMod);
+                    recurso.registrarDescarga(idMod);
                     System.out.println(Custom.VERDE + ">> Descargado!" + Custom.RESET);
                     break;
                 case 2:
