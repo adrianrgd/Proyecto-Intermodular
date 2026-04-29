@@ -15,4 +15,6 @@ public class Custom {
     public static final String NEGRITA = "\u001B[1m";
     public static final String CURSIVA = "\u001B[3m";
     public static final String NEGRITA_CURSIVA = "\u001B[1m\u001B[3m";
+    public static final String SUBRAYADO = "\u001B[4m";
+
 }

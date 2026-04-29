@@ -25,7 +25,7 @@ public class Main {
 
         while (true) {
             if (usuarioLogueado == null) {
-                usuarioLogueado = login.mostrar(sc, usuarioCtrl.obtenerTodos());
+                usuarioLogueado = login.mostrar(sc, usuarioCtrl.obtenerTodos(), usuarioCtrl);
                 if (usuarioLogueado == null)
                     break;
             } else {
@@ -40,7 +40,8 @@ public class Main {
                         break;
                     case 3:
                         perfilMenu.mostrar(sc, usuarioLogueado, usuarioCtrl, recursoCtrl, juegoCtrl, interaccionCtrl,
-                                categoriaCtrl);
+                                categoriaCtrl, usuarioLogueado);
+                        usuarioLogueado = refrescarSesion(usuarioLogueado, usuarioCtrl);
                         break;
                     case 4:
                         usuarioLogueado = null;
@@ -48,5 +49,18 @@ public class Main {
                 }
             }
         }
+    }
+
+    private static Usuario refrescarSesion(Usuario actual, UsuarioController UsuarioCtrl) {
+        if (actual == null)
+            return null;
+
+        Usuario actualizado = UsuarioCtrl.buscarPorId(actual.getIdUsuario());
+
+        if (actualizado == null) {
+            System.out.println(Custom.ROJO + "\n[!] Tu cuenta ya no existe. Cerrando sesión..." + Custom.RESET);
+            return null;
+        }
+        return actualizado;
     }
 }

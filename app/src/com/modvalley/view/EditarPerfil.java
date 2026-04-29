@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 import com.modvalley.Custom;
 import com.modvalley.controller.*;
-import com.modvalley.model.Usuario;
+import com.modvalley.model.*;
 
 public class EditarPerfil {
-    public void mostrar(Scanner sc, Usuario user, UsuarioController recurso,
+    public void mostrar(Scanner sc, Usuario user, UsuarioController usuarioCtrl,
             RecursoController recurso2, JuegoController juego, InteraccionController interaccion,
             CategoriaController categoriaCtrl) {
 
@@ -26,19 +26,19 @@ public class EditarPerfil {
 
         switch (opt) {
             case 1:
-                EditarNickname(sc, user, recurso);
+                EditarNickname(sc, user, usuarioCtrl);
                 break;
 
             case 2:
-                // EditarFoto(sc, user, recurso, usuarioCtrl);
+                EditarFoto(sc, user, usuarioCtrl);
                 break;
 
             case 3:
-                // EditarBio(sc, user, recurso);
+                EditarBio(sc, user, usuarioCtrl, interaccion);
                 break;
 
             case 4:
-                // EliminarCuenta(sc, user, recurso, juego, interaccion, categoriaCtrl);
+                EliminarCuenta(sc, user, interaccion, usuarioCtrl);
                 break;
 
             default:
@@ -60,19 +60,47 @@ public class EditarPerfil {
         }
     }
 
-    /*
-     * private void EditarFoto(Scanner sc, Usuario user, UsuarioController
-     * usuarioCtrl) {
-     * System.out.print(Custom.GRIS + "> Nueva Foto: " + Custom.RESET);
-     * String nuevaFoto = sc.nextLine();
-     * 
-     * if (nuevaFoto != null) {
-     * usuarioCtrl.actualizarFoto(user.getIdUsuario(), nuevaFoto);
-     * System.out.println(Custom.VERDE + "> Foto actualizada correctamente." +
-     * Custom.RESET);
-     * } else {
-     * System.out.println(Custom.ROJO + "> Foto no válida." + Custom.RESET);
-     * }
-     * }
-     */
+    private void EditarFoto(Scanner sc, Usuario user, UsuarioController usuarioCtrl) {
+        System.out.print(Custom.GRIS + "> Nueva Foto: " + Custom.RESET);
+        String nuevaFoto = sc.nextLine();
+
+        if (nuevaFoto != null) {
+            usuarioCtrl.actualizarFoto(user.getIdUsuario(), nuevaFoto);
+            System.out.println(Custom.VERDE + "> Foto actualizada correctamente." + Custom.RESET);
+        } else {
+            System.out.println(Custom.ROJO + "> Foto no válida." + Custom.RESET);
+
+        }
+    }
+
+    private void EditarBio(Scanner sc, Usuario user, UsuarioController usuarioCtrl,
+            InteraccionController interaccion) {
+
+        System.out.println(Custom.AMARILLO + "\nBiografía: " + Custom.RESET + user.getBiografia());
+        System.out.print(Custom.GRIS + "> Nueva Biografía: " + Custom.RESET);
+
+        String nuevaBio = sc.nextLine();
+
+        if (nuevaBio != null) {
+            usuarioCtrl.actualizarBio(user.getIdUsuario(), nuevaBio);
+            System.out.println(Custom.VERDE + "> Biografia actualizada correctamente!" + Custom.RESET);
+        } else {
+            System.out.println(Custom.ROJO + "> Biografia no válida." + Custom.RESET);
+        }
+    }
+
+    private void EliminarCuenta(Scanner sc, Usuario user, InteraccionController interaccion,
+            UsuarioController usuarioCtrl) {
+        System.out.println(Custom.ROJO + "¿SEGURO QUE DESEAS ELIMINAR TU CUENTA?" + Custom.RESET);
+        System.out.println(
+                Custom.GRIS + "Tus mods y comentarios permanecerán, pero tu perfil desaparecerá." + Custom.RESET);
+        System.out.print(Custom.GRIS + "> Confirmar (s/n): " + Custom.RESET);
+        String confirmacion = sc.nextLine();
+
+        if (confirmacion.equalsIgnoreCase("s")) {
+            usuarioCtrl.eliminarUsuario(user.getIdUsuario());
+        }
+
+    }
+
 }

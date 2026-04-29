@@ -28,11 +28,11 @@ public class SubirContenido {
         sc.nextLine();
 
         // 3. Datos del Mod
-        System.out.print("Nombre: ");
+        System.out.print(Custom.GRIS + "> Nombre: " + Custom.RESET);
         String nombre = sc.nextLine();
-        System.out.print("Versión: ");
+        System.out.print(Custom.GRIS + "> Versión: " + Custom.RESET);
         String version = sc.nextLine();
-        System.out.print("Descripción: ");
+        System.out.print(Custom.GRIS + "> Descripción: " + Custom.RESET);
         String desc = sc.nextLine();
 
         Recurso nuevo = new Recurso(0, nombre, desc, version, 0, idJuego, catNum, autor.getIdUsuario());

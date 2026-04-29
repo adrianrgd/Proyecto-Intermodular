@@ -51,7 +51,6 @@ public class UsuarioDAO {
         return lista;
     }
 
-    // Validación del ID elegido
     public Usuario buscarPorId(int id) {
         String sql = "SELECT * FROM USUARIO WHERE id_usuario = ?";
         try (Connection conn = Conexion.conectar();
@@ -84,6 +83,77 @@ public class UsuarioDAO {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void ActualizarFoto(int id, String nuevaFoto) {
+        String sql = "UPDATE USUARIO SET foto_perfil = ? WHERE id_usuario = ?";
+        try (Connection conn = Conexion.conectar();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, nuevaFoto);
+            pstmt.setInt(2, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void ActualizarBio(int id, String nuevaBio) {
+        String sql = "UPDATE USUARIO SET biografia = ? WHERE id_usuario = ?";
+        try (Connection conn = Conexion.conectar();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, nuevaBio);
+            pstmt.setInt(2, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void eliminarUsuario(int id) {
+        String sql = "DELETE FROM USUARIO WHERE id_usuario = ?";
+        try (Connection conn = Conexion.conectar();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+            int filas = pstmt.executeUpdate();
+
+            if (filas > 0) {
+                System.out.println(Custom.VERDE + "> Usuario eliminado de la BBDD." + Custom.RESET);
+            }
+        } catch (SQLException e) {
+            System.out.println(Custom.ROJO + "Error SQL: " + e.getMessage() + Custom.RESET);
+        }
+    }
+
+    public void registrarUsuario(String nickname, String email, String biografia) {
+        // Si la bio está vacía, no la incluimos en el INSERT para que MySQL use el
+        // DEFAULT
+        String sql;
+        boolean tieneBio = (biografia != null && !biografia.trim().isEmpty());
+
+        if (tieneBio) {
+            sql = "INSERT INTO USUARIO (nickname, email, biografia) VALUES (?, ?, ?)";
+        } else {
+            sql = "INSERT INTO USUARIO (nickname, email) VALUES (?, ?)";
+        }
+
+        try (Connection conn = Conexion.conectar();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, nickname);
+            pstmt.setString(2, email);
+            if (tieneBio) {
+                pstmt.setString(3, biografia);
+            }
+
+            pstmt.executeUpdate();
+            System.out.println(Custom.VERDE + "> ¡Registro completado con éxito!" + Custom.RESET);
+        } catch (SQLException e) {
+            if (e.getErrorCode() == 1062) { // Código de error para duplicados (email)
+                System.out.println(Custom.ROJO + "> Error: El email ya está registrado." + Custom.RESET);
+            } else {
+                e.printStackTrace();
+            }
         }
     }
 }

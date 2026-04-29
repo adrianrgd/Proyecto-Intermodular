@@ -4,13 +4,15 @@ CREATE DATABASE IF NOT EXISTS ModValley;
 USE ModValley;
 
 -- 1. Tablas No Dependientes
+
+DROP TABLE IF EXISTS USUARIO;
 CREATE TABLE USUARIO (
     id_usuario INT PRIMARY KEY AUTO_INCREMENT,
     nickname VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     fecha_registro DATE DEFAULT (CURRENT_DATE),
-    biografia TEXT,
-    foto_perfil VARCHAR(50)
+    biografia TEXT DEFAULT ('Sin Biografía'),
+    foto_perfil VARCHAR(50) DEFAULT ('foto_perfil_default.png')
 );
 
 CREATE TABLE CATEGORIA (

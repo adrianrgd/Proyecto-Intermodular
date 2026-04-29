@@ -38,5 +38,4 @@ public class RecursoController {
     public String obtenerFechaSubidaStr(int idMod) {
         return recursoDAO.obtenerFechaSubidaStr(idMod);
     }
-
 }

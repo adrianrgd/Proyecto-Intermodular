@@ -11,12 +11,11 @@ public class GestionarContenido {
             CategoriaController categoriaCtrl) {
         System.out.println(Custom.GRIS + "\n=== GESTIONAR CONTENIDO ===" + Custom.RESET);
 
-        // subir o eliminar
         System.out.println(Custom.VERDE + "1. Subir un mod" + Custom.RESET);
         System.out.println(Custom.VERDE + "2. Eliminar un mod" + Custom.RESET);
         System.out.println(Custom.ROJO + "0. Volver al Menu" + Custom.RESET);
         System.out.println(Custom.GRIS + "===========================" + Custom.RESET);
-        System.out.print(Custom.GRIS + "Opción: " + Custom.RESET);
+        System.out.print(Custom.GRIS + "Opcion: " + Custom.RESET);
         int opcion_gestion = sc.nextInt();
         sc.nextLine();
         switch (opcion_gestion) {

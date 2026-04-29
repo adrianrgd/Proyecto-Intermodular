@@ -9,27 +9,43 @@ import java.util.Scanner;
 public class PerfilMenu {
 
     public void mostrar(Scanner sc, Usuario user, UsuarioController usuarioCtrl, RecursoController recurso,
-            JuegoController juego, InteraccionController interaccion, CategoriaController categoriaCtrl) {
+            JuegoController juego, InteraccionController interaccion, CategoriaController categoriaCtrl,
+            Usuario usuarioLogueado) {
         boolean enPerfil = true;
 
         while (enPerfil) {
-            System.out.println(Custom.GRIS + "\n=== Perfil de " + Custom.AMARILLO + user.getNickname() + Custom.GRIS
-                    + " ===" + Custom.RESET);
-            System.out.println(Custom.VERDE + "1. Mis Mods publicados" + Custom.RESET);
-            System.out.println(Custom.VERDE + "2. Mis Valoraciones" + Custom.RESET);
-            System.out.println(Custom.VERDE + "3. Editar Perfil" + Custom.RESET);
-            System.out.println(Custom.ROJO + "0. Volver al Menu" + Custom.RESET);
-            System.out.println(Custom.GRIS + "===========================" + Custom.RESET);
+            System.out.println(Custom.GRIS + "\n--- [ " + Custom.AMARILLO + "PERFIL: " + user.getNickname()
+                    + Custom.GRIS + " ] ---" + Custom.RESET);
+
+            System.out.println(Custom.GRIS + "ID: " + Custom.AMARILLO + user.getIdUsuario() + Custom.GRIS +
+                    " | " + Custom.VERDE + "Registro: " + user.getFecha_registro() + Custom.GRIS +
+                    " | Email: " + Custom.CYAN + user.getEmail() + Custom.RESET);
+
+            String bio = user.getBiografia();
+            System.out
+                    .println(Custom.GRIS + "Bio: " + Custom.RESET + Custom.CURSIVA + "\"" + bio + "\"" + Custom.RESET);
+
+            System.out.println(
+                    Custom.GRIS + "--------------------------------------------------------------------------------"
+                            + Custom.RESET);
+            System.out.println(Custom.VERDE + "1.Mods" + Custom.RESET + " | " +
+                    Custom.VERDE + "2.Valoraciones" + Custom.RESET + " | " +
+                    Custom.VERDE + "3.Editar" + Custom.RESET + " | " +
+                    Custom.ROJO + "0.Volver" + Custom.RESET);
+            System.out.println(
+                    Custom.GRIS + "--------------------------------------------------------------------------------"
+                            + Custom.RESET);
+
             System.out.print("Opción: ");
             int opt = sc.nextInt();
             sc.nextLine();
 
             switch (opt) {
                 case 1:
-                    mostrarMisMods(user, recurso, juego);
+                    mostrarMisMods(sc, user, recurso, juego);
                     break;
                 case 2:
-                    mostrarMisValoraciones(user, interaccion, recurso, juego);
+                    mostrarMisValoraciones(user, sc, interaccion, recurso, juego);
                     break;
                 case 3:
                     new EditarPerfil().mostrar(sc, user, usuarioCtrl, recurso, juego, interaccion, categoriaCtrl);
@@ -41,7 +57,7 @@ public class PerfilMenu {
         }
     }
 
-    private void mostrarMisMods(Usuario user, RecursoController recurso, JuegoController juego) {
+    private void mostrarMisMods(Scanner sc, Usuario user, RecursoController recurso, JuegoController juego) {
         System.out.println(
                 Custom.GRIS + "\n" + Custom.GRIS + "Tus Publicaciones:"
                         + Custom.RESET);
@@ -58,9 +74,12 @@ public class PerfilMenu {
                         + recurso.obtenerFechaSubidaStr(r.getId()) + Custom.RESET);
             }
         }
+        System.out.print(Custom.GRIS + "\n" + "Presiona ENTER para volver al menu!" + Custom.RESET);
+        sc.nextLine();
     }
 
-    private void mostrarMisValoraciones(Usuario user, InteraccionController interaccion, RecursoController recurso,
+    private void mostrarMisValoraciones(Usuario user, Scanner sc, InteraccionController interaccion,
+            RecursoController recurso,
             JuegoController juego) {
         System.out.println(
                 Custom.GRIS + "\n" + Custom.GRIS + "Tus Valoraciones:" + Custom.RESET);
@@ -72,5 +91,7 @@ public class PerfilMenu {
                     + " Puntuación: "
                     + v.getPuntuacion() + "/5");
         }
+        System.out.print(Custom.GRIS + "\n" + "Presiona ENTER para volver al menu!" + Custom.RESET);
+        sc.nextLine();
     }
 }
