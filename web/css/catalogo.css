@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+.panel_juegos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 700px;
+    background-color: #f5f5f5;
+}
+
+.juegos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 40px;
+}
+
+h2 {
+    font-size: 40px;
+    font-family: 'Lexend', sans-serif;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: #0047b3;
+    text-decoration-thickness: 5px;
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+button {
+    border: 0;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+button img {
+    width: 400px;
+    height: 600px;
+    border-radius: 35px;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
