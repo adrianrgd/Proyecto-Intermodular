@@ -1,4 +1,7 @@
-<?php include 'Config/db.php'; ?>
+<?php 
+session_start();
+include 'Config/db.php'; 
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
