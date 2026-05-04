@@ -2,7 +2,6 @@
 session_start();
 include 'Config/db.php'; 
 
-// Si no hay usuario logueado, redirigir al login
 if (!isset($_SESSION['usuario_logueado'])) {
     header("Location: login.php");
     exit;
@@ -17,6 +16,7 @@ $user = $_SESSION['usuario_logueado'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel - ModValley</title>
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,55 +24,32 @@ $user = $_SESSION['usuario_logueado'];
 </head>
 <body>
     <canvas id="lienzo-fondo"></canvas>
-
-    <section class="panel-menu">
-        <div class="panel-cabecera">
-            <div class="avatar">
-                <i class="fa-solid fa-user"></i>
-            </div>
-            <h1 class="titulo-panel">Panel de <?php echo htmlspecialchars($user['nickname']); ?></h1>
-            <p class="subtitulo">¿Qué quieres hacer hoy?</p>
-        </div>
-
-        <nav class="menu-opciones">
-            <a href="catalogo.html" class="opcion-menu" id="btn-catalogo">
-                <div class="opcion-icono"><i class="fa-solid fa-book"></i></div>
-                <div class="opcion-texto">
-                    <span class="opcion-titulo">Ver catálogo de mods</span>
-                    <span class="opcion-desc">Explora y descarga mods para tus juegos</span>
-                </div>
-                <i class="fa-solid fa-chevron-right opcion-flecha"></i>
-            </a>
-
-            <a href="subir_contenido.html" class="opcion-menu" id="btn-gestionar">
-                <div class="opcion-icono icono-azul"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-                <div class="opcion-texto">
-                    <span class="opcion-titulo">Gestionar contenido</span>
-                    <span class="opcion-desc">Sube y administra tus mods</span>
-                </div>
-                <i class="fa-solid fa-chevron-right opcion-flecha"></i>
-            </a>
-
-            <a href="perfil.html" class="opcion-menu" id="btn-perfil">
-                <div class="opcion-icono icono-morado"><i class="fa-solid fa-user-gear"></i></div>
-                <div class="opcion-texto">
-                    <span class="opcion-titulo">Perfil</span>
-                    <span class="opcion-desc">Ajustes de tu cuenta y datos personales</span>
-                </div>
-                <i class="fa-solid fa-chevron-right opcion-flecha"></i>
-            </a>
+    <header class="header">
+        <nav class="nav">
+            <ul>
+                <li><a href="index.php"><i class="fa-solid fa-home"></i> Inicio</a></li> 
+                <li><a href="catalogo.php"><i class="fa-solid fa-book"></i> Catálogo</a></li>
+                <li><a href="subir_contenido.html"><i class="fa-solid fa-cloud-arrow-up"></i> Gestion</a></li>
+                <li><a href="perfil.php"><i class="fa-solid fa-user"></i> Perfil</a></li>
+                <li><a href="php/logout.php"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+            </ul>
         </nav>
-
-        <div class="separador"></div>
-
-        <a href="logout.php" class="opcion-menu opcion-salir" id="btn-cerrar-sesion">
-            <div class="opcion-icono icono-rojo"><i class="fa-solid fa-right-from-bracket"></i></div>
-            <div class="opcion-texto">
-                <span class="opcion-titulo">Cerrar sesión</span>
-            </div>
-        </a>
+    </header>
+    <section class="panel-principal">
+      <div class="bienvenida">
+        <h1 class="titulo">Bienvenido a ModValley</h1>
+        <p class="subtitulo">Explora y descarga mods para tus juegos favoritos</p>
+      </div>
+      <div class="panel_imagenes_principal">
+        <div class="imagenes_panel">
+          <img class="slide active" src="img/SinFoto.png" alt="Portada">
+          <img class="slide" src="img/SinFoto2.png" alt="Portada">
+          <img class="slide" src="img/SinFoto3.png" alt="Portada">
+        </div>
+      </div>
+      <button class="boton_explorar" onclick="window.location.href='catalogo.html'">Explorar catálogo</button>
     </section>
-
     <script src="js/lienzo.js"></script>
+    <script src="js/img_panel_slide.js"></script>
 </body>
 </html>
