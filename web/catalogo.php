@@ -13,13 +13,12 @@ $mods = [];
 $nombre_juego_sel = "";
 
 if ($id_juego_sel) {
-    // Consulta para un juego específico: los más recientes primero
     $sql_mods = "SELECT r.*, u.nickname as autor, v.nombre_juego,
                  (SELECT AVG(puntuacion) FROM VALORACION v2 WHERE v2.id_recurso = r.id_recurso) as media_valoracion
                  FROM RECURSO r 
                  JOIN USUARIO u ON r.id_usuario = u.id_usuario 
                  JOIN VIDEOJUEGO v ON r.id_videojuego = v.id_videojuego
-                 WHERE r.id_videojuego = ? 
+                 WHERE r.id_videojuego = ?
                  ORDER BY r.fecha_subida DESC";
     $stmt = $conn->prepare($sql_mods);
     $stmt->bind_param("i", $id_juego_sel);
@@ -34,7 +33,7 @@ if ($id_juego_sel) {
         }
     }
 } else {
-    // Consulta para "Todos los juegos": mostrar los más descargados de todo el catálogo
+    // Mostrar todos los mods mas descargados
     $sql_mods = "SELECT r.*, u.nickname as autor, v.nombre_juego,
                  (SELECT AVG(puntuacion) FROM VALORACION v2 WHERE v2.id_recurso = r.id_recurso) as media_valoracion
                  FROM RECURSO r 
@@ -60,6 +59,7 @@ if ($id_juego_sel) {
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/catalogo.css">
+    <link rel="stylesheet" href="css/mod_detalle.css">
 </head>
 <body>
     <canvas id="lienzo-fondo"></canvas>
@@ -81,23 +81,27 @@ if ($id_juego_sel) {
         <aside class="catalogo-sidebar">
             <h3><i class="fa-solid fa-gamepad"></i> Juegos</h3>
             <div class="lista-juegos">
-                <a href="catalogo.php" class="juego-item <?php echo !$id_juego_sel ? 'active' : ''; ?>">
+                <a href="catalogo.php" class="juego-item <?php echo !$id_juego_sel ? 'active' : ''; ?>" data-juego="">
                     Todos los Juegos
                 </a>
                 <?php foreach ($juegos as $juego): ?>
                     <a href="catalogo.php?juego=<?php echo $juego['id_videojuego']; ?>" 
-                       class="juego-item <?php echo $id_juego_sel == $juego['id_videojuego'] ? 'active' : ''; ?>">
+                       class="juego-item <?php echo $id_juego_sel == $juego['id_videojuego'] ? 'active' : ''; ?>"
+                       data-juego="<?php echo $juego['id_videojuego']; ?>"
+                       data-nombre="<?php echo htmlspecialchars($juego['nombre_juego']); ?>">
                         <?php echo htmlspecialchars($juego['nombre_juego']); ?>
                     </a>
                 <?php endforeach; ?>
+
             </div>
         </aside>
 
         <!-- Feed de Contenido -->
         <section class="catalogo-feed">
             <div class="feed-header">
-                <h2><?php echo $id_juego_sel ? "Mods para " . htmlspecialchars($nombre_juego_sel) : "Los más populares"; ?></h2>
-
+                <div class="feed-fixer">
+                    <h2 id="feed-title"><?php echo $id_juego_sel ? "Mods para " . htmlspecialchars($nombre_juego_sel) : "Los más populares"; ?></h2>
+                </div>
                 <div class="search-bar">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <input type="text" placeholder="Buscar mods..." id="search-input">
@@ -129,10 +133,11 @@ if ($id_juego_sel) {
                                         <i class="fa-solid fa-star"></i> <?php echo $mod['media_valoracion'] ? number_format($mod['media_valoracion'], 1) : '0.0'; ?>
                                     </span>
                                 </div>
-                                <button class="btn-download" onclick="descargarMod(<?php echo $mod['id_recurso']; ?>)">
-                                    <i class="fa-solid fa-download"></i>
-                                </button>
-
+                                <div class="mod-card-actions">
+                                    <button class="btn-view" onclick="verDetallesMod(<?php echo $mod['id_recurso']; ?>)">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     <?php endforeach; ?>

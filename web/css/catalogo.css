@@ -25,6 +25,11 @@ body {
   padding: 0 20px;
   gap: 30px;
   min-height: 80vh;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.catalogo-container.full-width {
+  justify-content: center;
 }
 
 /* SIDEBAR */
@@ -38,6 +43,24 @@ body {
   height: fit-content;
   position: sticky;
   top: 110px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
+}
+
+.catalogo-sidebar.hidden {
+  opacity: 0;
+  transform: translateX(-50px);
+  flex: 0;
+  width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.transition-active {
+  pointer-events: none;
 }
 
 .catalogo-sidebar h3 {
@@ -129,6 +152,7 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 25px;
+  transition: opacity 0.3s ease;
 }
 
 .mod-card {
@@ -139,7 +163,9 @@ body {
   padding: 25px;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s, border-color 0.3s;
+  transition:
+    transform 0.3s,
+    border-color 0.3s;
 }
 
 .mod-card:hover {
@@ -147,31 +173,30 @@ body {
   border-color: #caffc3;
 }
 
+.mod-game-label {
+  font-size: 0.9rem;
+  background: rgba(202, 255, 195, 0.1);
+  color: #caffc3;
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
 .mod-card-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   margin-bottom: 15px;
   font-size: 0.75rem;
   color: #888;
 }
 
-.mod-game-label {
+.mod-version {
   background: rgba(202, 255, 195, 0.1);
   color: #caffc3;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border: 1px solid rgba(202, 255, 195, 0.2);
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-weight: bold;
 }
-
-.mod-author {
-  color: #888;
-  font-style: italic;
-}
-
 
 .mod-card h3 {
   margin: 0 0 10px;
@@ -212,7 +237,12 @@ body {
   color: #caffc3;
 }
 
-.btn-download {
+.mod-card-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-view {
   background: #caffc3;
   color: #333;
   border: none;
@@ -220,20 +250,27 @@ body {
   height: 40px;
   border-radius: 12px;
   cursor: pointer;
-  transition: all 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s;
   font-size: 1.1rem;
 }
 
-.btn-download:hover {
+.btn-view {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-view:hover {
+  background: rgba(255, 255, 255, 0.2);
   transform: scale(1.1);
-  box-shadow: 0 0 15px rgba(202, 255, 195, 0.3);
 }
 
 /* EMPTY STATES */
-.empty-state, .welcome-catalogo {
+.empty-state,
+.welcome-catalogo {
   grid-column: 1 / -1;
   text-align: center;
   padding: 80px 20px;
@@ -242,7 +279,8 @@ body {
   color: #888;
 }
 
-.empty-state i, .welcome-catalogo i {
+.empty-state i,
+.welcome-catalogo i {
   font-size: 3rem;
   color: #caffc3;
   opacity: 0.3;

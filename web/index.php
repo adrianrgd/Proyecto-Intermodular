@@ -47,7 +47,7 @@ $user = $_SESSION['usuario_logueado'];
           <img class="slide" src="img/SinFoto3.png" alt="Portada">
         </div>
       </div>
-      <button class="boton_explorar" onclick="window.location.href='catalogo.html'">Explorar catálogo</button>
+      <button class="boton_explorar" onclick="window.location.href='catalogo.php'">Explorar catálogo</button>
     </section>
     <script src="js/lienzo.js"></script>
     <script src="js/img_panel_slide.js"></script>
