@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion - ModValley</title>
+    <link rel="stylesheet" href="css/gestion.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas id="lienzo-fondo"></canvas>
+    <header class="header">
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html"><i class="fa-solid fa-home"></i> Inicio</a></li> 
+                <li><a href="catalogo.html"><i class="fa-solid fa-book"></i> Catálogo</a></li>
+                <li><a href="gestion.html"><i class="fa-solid fa-cloud-arrow-up"></i> Gestion</a></li>
+                <li><a href="perfil.php"><i class="fa-solid fa-user"></i> Perfil</a></li>
+                <li><a href="php/logout.php"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="gestion-container">
+        <section class="gestion-feed">
+            <div class="gestion-header">
+                <h1><i class="fa-solid fa-database"></i> Gestión de Contenido</h1>
+                <p>Sube y administra tus mods para compartirlos con la comunidad</p>
+            </div>
+            <div class="gestion-contenido">
+                <a href="subir_mod.html" class="gestion-item">
+                    <i class="fa-solid fa-plus"></i>
+                    <span><i class="fa-solid fa-arrow-down-to-square"></i> Subir Nuevo Mod</span>
+                </a>
+                <a href="eliminar_mod.html" class="gestion-item">
+                    <i class="fa-solid fa-folder-open"></i>
+                    <span><i class="fa-solid fa-pen-to-square"></i> Eliminar Mod</span>
+                </a>
+            </div>
+        </section>
+    </main>
+    <script src="js/lienzo.js"></script>

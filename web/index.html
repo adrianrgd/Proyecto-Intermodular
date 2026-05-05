@@ -1,14 +1,3 @@
-<?php 
-session_start();
-include 'Config/db.php'; 
-
-if (!isset($_SESSION['usuario_logueado'])) {
-    header("Location: login.php");
-    exit;
-}
-
-$user = $_SESSION['usuario_logueado'];
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -20,21 +9,22 @@ $user = $_SESSION['usuario_logueado'];
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gorditas:wght@400;700&family=Lexend:wght@100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <canvas id="lienzo-fondo"></canvas>
     <header class="header">
         <nav class="nav">
             <ul>
-                <li><a href="index.php"><i class="fa-solid fa-home"></i> Inicio</a></li> 
-                <li><a href="catalogo.php"><i class="fa-solid fa-book"></i> Catálogo</a></li>
-                <li><a href="subir_contenido.html"><i class="fa-solid fa-cloud-arrow-up"></i> Gestion</a></li>
+                <li><a href="index.html"><i class="fa-solid fa-home"></i> Inicio</a></li> 
+                <li><a href="catalogo.html"><i class="fa-solid fa-book"></i> Catálogo</a></li>
+                <li><a href="gestion.html"><i class="fa-solid fa-cloud-arrow-up"></i> Gestion</a></li>
                 <li><a href="perfil.php"><i class="fa-solid fa-user"></i> Perfil</a></li>
                 <li><a href="php/logout.php"><i class="fa-solid fa-right-from-bracket"></i></a></li>
             </ul>
         </nav>
     </header>
+    <main class="index-container">
     <section class="panel-principal">
       <div class="bienvenida">
         <h1 class="titulo">Bienvenido a ModValley</h1>
@@ -49,6 +39,15 @@ $user = $_SESSION['usuario_logueado'];
       </div>
       <button class="boton_explorar" onclick="window.location.href='catalogo.php'">Explorar catálogo</button>
     </section>
+    <section class="feed-informativo">
+        <div class="introduccion">
+            <h2>Preservando Cultura, Historia y Creatividad</h2>
+            <p>Bienvenido a ModValley, tu destino principal para descubrir y compartir mods para tus juegos favoritos. 
+            Explora nuestro catálogo en constante crecimiento, descarga mods de alta calidad y únete a nuestra comunidad 
+            de entusiastas del modding. ¡Empieza a personalizar tu experiencia de juego hoy mismo!</p>
+        </div>
+    </section>
+    </main>
     <script src="js/lienzo.js"></script>
     <script src="js/img_panel_slide.js"></script>
 </body>

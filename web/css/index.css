@@ -1,3 +1,11 @@
+.index-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 60px;
+}
+
 .panel-principal {
   position: relative;
   width: 100%;
@@ -72,6 +80,29 @@
 
 .boton_explorar:hover {
   transform: scale(1.05);
+}
+
+.feed-informativo {
+  margin: 40px 40px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  color: #caffc3;
+}
+
+.feed-informativo h2 {
+  text-align: center;
+  font-family: 'Gorditas', cursive;
+  font-size: 1.8rem;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.feed-informativo p {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #ebffe8;
+  opacity: 0.8;
 }
 
 /* ===== Responsive ===== */

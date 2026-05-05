@@ -1,0 +1,63 @@
+.catalogo-container {
+  display: flex;
+  max-width: 1400px;
+  margin: 110px auto 40px;
+  padding: 0 20px;
+  gap: 30px;
+  min-height: 80vh;
+}
+
+.gestion-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.gestion-header {
+  display: grid;
+  grid-template-areas:
+  "h1"
+  "p";
+  gap: 10px;
+}
+
+.gestion-header h1 {
+  grid-area: h1;
+  color: #caffc3;
+  font-size: 2rem;
+  text-align: center;
+  gap: 15px;
+}
+
+.gestion-header p {
+  grid-area: p;
+  color: #ffffff;
+  text-align: center;
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+.gestion-contenido {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px 20px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+}
+
+.gestion-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  color: #caffc3;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s;
+  max-width: fit-content;
+}
