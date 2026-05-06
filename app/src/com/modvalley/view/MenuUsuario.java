@@ -1,8 +1,7 @@
 package com.modvalley.view;
 
-import com.modvalley.model.Usuario;
 import com.modvalley.Custom;
-
+import com.modvalley.model.Usuario;
 import java.util.Scanner;
 
 public class MenuUsuario {

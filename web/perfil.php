@@ -63,7 +63,7 @@ $foto_perfil = !empty($user['foto_perfil']) ? $user['foto_perfil'] : 'img/FotoPe
             <ul>
                 <li><a href="index.php"><i class="fa-solid fa-home"></i> Inicio</a></li> 
                 <li><a href="catalogo.php"><i class="fa-solid fa-book"></i> Catálogo</a></li>
-                <li><a href="subir_contenido.html"><i class="fa-solid fa-cloud-arrow-up"></i> Gestion</a></li>
+                <li><a href="gestion.php"><i class="fa-solid fa-cloud-arrow-up"></i> Gestion</a></li>
                 <li><a href="perfil.php" class="active"><i class="fa-solid fa-user"></i> Perfil</a></li>
                 <li><a href="php/logout.php"><i class="fa-solid fa-right-from-bracket"></i></a></li>
             </ul>

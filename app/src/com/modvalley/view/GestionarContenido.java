@@ -1,9 +1,8 @@
 package com.modvalley.view;
 
-import com.modvalley.model.*;
 import com.modvalley.Custom;
 import com.modvalley.controller.*;
-
+import com.modvalley.model.*;
 import java.util.Scanner;
 
 public class GestionarContenido {
@@ -19,17 +18,11 @@ public class GestionarContenido {
         int opcion_gestion = sc.nextInt();
         sc.nextLine();
         switch (opcion_gestion) {
-            case 1:
-                new SubirContenido().mostrar(sc, recurso, autor, juego, categoriaCtrl);
-                break;
+            case 1 -> new SubirContenido().mostrar(sc, recurso, autor, juego, categoriaCtrl);
 
-            case 2:
-                new EliminarContenido().mostrar(sc, recurso, autor, juego, categoriaCtrl);
-                break;
+            case 2 -> new EliminarContenido().mostrar(sc, recurso, autor, juego, categoriaCtrl);
 
-            default:
-                System.out.println(Custom.ROJO + "\n>> Opción inválida." + Custom.RESET);
-                break;
+            default -> System.out.println(Custom.ROJO + "\n>> Opción inválida." + Custom.RESET);
         }
     }
 }

@@ -19,7 +19,7 @@ if ($id_juego_sel) {
                  JOIN USUARIO u ON r.id_usuario = u.id_usuario 
                  JOIN VIDEOJUEGO v ON r.id_videojuego = v.id_videojuego
                  WHERE r.id_videojuego = ?
-                 ORDER BY r.fecha_subida DESC";
+                 ORDER BY r.num_descargas DESC";
     $stmt = $conn->prepare($sql_mods);
     $stmt->bind_param("i", $id_juego_sel);
     $stmt->execute();
@@ -33,7 +33,7 @@ if ($id_juego_sel) {
         }
     }
 } else {
-    // Mostrar todos los mods mas descargados
+    // Si no hay juego seleccionado, mostrar los mods más populares
     $sql_mods = "SELECT r.*, u.nickname as autor, v.nombre_juego,
                  (SELECT AVG(puntuacion) FROM VALORACION v2 WHERE v2.id_recurso = r.id_recurso) as media_valoracion
                  FROM RECURSO r 
@@ -69,7 +69,7 @@ if ($id_juego_sel) {
             <ul>
                 <li><a href="index.php"><i class="fa-solid fa-home"></i> Inicio</a></li> 
                 <li><a href="catalogo.php" class="active"><i class="fa-solid fa-book"></i> Catálogo</a></li>
-                <li><a href="subir_contenido.html"><i class="fa-solid fa-cloud-arrow-up"></i> Gestion</a></li>
+                <li><a href="gestion.php"><i class="fa-solid fa-cloud-arrow-up"></i> Gestion</a></li>
                 <li><a href="perfil.php"><i class="fa-solid fa-user"></i> Perfil</a></li>
                 <li><a href="php/logout.php"><i class="fa-solid fa-right-from-bracket"></i></a></li>
             </ul>
