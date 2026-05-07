@@ -165,3 +165,38 @@ body {
         padding: 20px;
     }
 }
+/* RESPONSIVE MÓVIL */
+@media (max-width: 768px) {
+  .pagina-login {
+    padding: 24px 20px;
+    margin: 12px;
+    width: calc(100% - 24px);
+    border-radius: 16px;
+  }
+
+  .contenedor-doble {
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .divisor {
+    width: 100%;
+    height: 1px;
+    margin: 4px 0;
+  }
+
+  .h2 { font-size: 1.2rem; margin-bottom: 18px; }
+
+  .cuentas { max-height: 220px; }
+
+  .btn-usuario { padding: 12px; font-size: 0.9rem; }
+
+  .form-generico input { font-size: 1rem; padding: 13px 14px; }
+
+  .btn-registro { padding: 13px; font-size: 0.95rem; }
+}
+
+@media (max-width: 380px) {
+  .pagina-login { padding: 20px 16px; }
+  .h2 { font-size: 1.1rem; }
+}

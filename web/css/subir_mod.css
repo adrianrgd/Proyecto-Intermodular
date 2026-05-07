@@ -126,15 +126,15 @@ input:focus, textarea:focus {
 
   .mod-header-main h1 { font-size: 1.5rem; }
 
-  .mod-detalle-grid {
-    grid-template-columns: 1fr;
-  }
+  .mod-detalle-grid { grid-template-columns: 1fr; }
 
   .glass-section { padding: 18px; }
 
   input[type="text"],
   textarea,
   select { font-size: 1rem; padding: 13px; }
+
+  .btn-download-full { padding: 14px; font-size: 1rem; }
 }
 
 @media (max-width: 430px) {

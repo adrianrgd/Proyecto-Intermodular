@@ -1,159 +1,204 @@
 .mod-detalle-wrapper {
-  animation: fadeIn 0.4s ease-out;
+  animation: fadeIn 0.35s ease-out;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
+/* ── Botón volver */
 .btn-back {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
-  padding: 8px 15px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  padding: 8px 16px;
   border-radius: 12px;
   cursor: pointer;
-  margin-bottom: 20px;
-  transition: all 0.3s;
+  margin-bottom: 22px;
+  transition: background 0.2s, transform 0.2s;
   font-family: "Lexend", sans-serif;
+  font-size: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .btn-back:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateX(-5px);
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(-4px);
 }
 
+/* ── Cabecera del detalle */
 .mod-detalle-header {
-  width: 1000px;
+  width: 100%;
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 30px;
-  background: rgba(0, 0, 0, 0.3);
+  gap: 24px;
+  padding: 28px 30px;
+  background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
-  margin-bottom: 25px;
+  margin-bottom: 22px;
+}
+
+.mod-game-pill {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: rgba(202, 255, 195, 0.1);
+  color: #caffc3;
+  padding: 3px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
 }
 
 .mod-header-main h1 {
-  margin: 10px 0;
-  font-size: 2.5rem;
+  margin: 0 0 12px;
+  font-size: 2rem;
   color: #caffc3;
+  line-height: 1.2;
+  word-break: break-word;
 }
 
 .mod-meta {
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 16px;
   align-items: center;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.875rem;
+}
+
+.mod-version {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2px 10px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+}
+
+.mod-author-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .mini-avatar {
-  width: 27px;
-  height: 27px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
-  vertical-align: middle;
-  margin-right: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
+.mod-date i { margin-right: 4px; }
+
+/* Stats grandes (derecha) */
 .mod-header-stats {
   display: flex;
-  gap: 30px;
+  gap: 28px;
+  flex-shrink: 0;
 }
 
 .stat-big {
-  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 4px;
 }
 
 .stat-big i {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: #caffc3;
-  margin-bottom: 5px;
 }
 
 .stat-big span {
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
 }
 
+/* ── Grid principal del detalle */
 .mod-detalle-grid {
   display: grid;
-  grid-template-columns: 1fr 300px;
-  gap: 25px;
-  width: 1000px;
+  grid-template-columns: 1fr 280px;
+  gap: 22px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .glass-section {
-  background: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  padding: 25px;
-  margin-bottom: 25px;
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  padding: 24px;
+  margin-bottom: 20px;
 }
 
+.glass-section:last-child { margin-bottom: 0; }
+
 .glass-section h3 {
-  margin-top: 0;
-  margin-bottom: 20px;
-  font-size: 1.3rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 0 0 18px;
+  font-size: 1.1rem;
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding-bottom: 10px;
 }
 
 .mod-description-text {
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.925rem;
+  margin: 0;
 }
 
-/* Formulario de comentarios */
+/* ── Formulario de comentario */
 .comentario-form {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 20px;
-  border-radius: 15px;
-  margin-bottom: 30px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 18px;
+  border-radius: 14px;
+  margin-bottom: 26px;
 }
 
 .rating-input {
-  margin-bottom: 15px;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
+  margin-bottom: 14px;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .stars-selector {
-  color: #666;
-  font-size: 1.2rem;
+  display: flex;
+  gap: 4px;
+  font-size: 1.15rem;
+  color: #555;
 }
 
 .star-opt {
   cursor: pointer;
-  transition:
-    transform 0.2s,
-    color 0.2s;
+  transition: transform 0.15s, color 0.15s;
 }
 
 .star-opt:hover,
-.star-opt.active {
-  color: #caffc3;
-  transform: scale(1.2);
-}
-
-.star-opt.solid {
-  color: #caffc3;
-}
+.star-opt.active { color: #caffc3; transform: scale(1.2); }
 
 .textarea-wrapper {
   position: relative;
@@ -161,117 +206,172 @@
 
 .comentario-form textarea {
   width: 100%;
-  background: rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.35);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
-  padding: 15px;
-  padding-right: 50px;
-  color: white;
+  padding: 14px 52px 14px 14px;
+  color: #fff;
   font-family: inherit;
+  font-size: 0.875rem;
   resize: vertical;
   min-height: 80px;
+  transition: border-color 0.2s;
 }
+
+.comentario-form textarea:focus {
+  outline: none;
+  border-color: rgba(202, 255, 195, 0.4);
+}
+
+.comentario-form textarea::placeholder { color: #555; }
 
 .btn-send-comment {
   position: absolute;
-  right: 15px;
-  bottom: 15px;
+  right: 12px;
+  bottom: 12px;
   background: #caffc3;
   color: #000;
   border: none;
-  width: 35px;
-  height: 35px;
+  width: 34px;
+  height: 34px;
   border-radius: 10px;
   cursor: pointer;
-  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .btn-send-comment:hover {
   transform: scale(1.1) rotate(10deg);
-  box-shadow: 0 0 15px rgba(202, 255, 195, 0.4);
+  box-shadow: 0 0 14px rgba(202, 255, 195, 0.35);
 }
 
-/* Lista de comentarios */
+.login-msg {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 20px;
+}
+
+.login-msg a { color: #caffc3; }
+
+/* ── Lista de comentarios */
 .comentarios-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
+}
+
+.no-comments {
+  color: #555;
+  font-size: 0.875rem;
+  margin: 0;
 }
 
 .comentario-item {
   display: flex;
-  gap: 15px;
-  padding-bottom: 15px;
+  gap: 14px;
+  padding-bottom: 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.comentario-item:last-child {
-  border-bottom: none;
-}
+.comentario-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+.com-content { flex: 1; min-width: 0; }
 
 .com-header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
   margin-bottom: 5px;
-  font-size: 0.9rem;
 }
 
-.com-header strong {
-  color: #caffc3;
-  margin-right: 10px;
-}
-
-.com-header span {
-  color: rgba(255, 255, 255, 0.4);
-  font-size: 0.8rem;
-}
+.com-header strong { color: #caffc3; font-size: 0.9rem; }
+.com-header span   { color: rgba(255,255,255,0.35); font-size: 0.78rem; }
 
 .com-content p {
   margin: 0;
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.55;
+  word-break: break-word;
 }
 
-/* Sidebar */
+/* ── Botón de descarga */
 .btn-download-full {
   width: 100%;
   background: linear-gradient(135deg, #caffc3 0%, #8de084 100%);
   color: #000;
   border: none;
-  padding: 15px;
-  border-radius: 15px;
-  font-weight: bold;
-  font-size: 1.1rem;
+  padding: 14px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: inherit;
   cursor: pointer;
-  margin-bottom: 20px;
-  transition: all 0.3s;
+  margin-bottom: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .btn-download-full:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(202, 255, 195, 0.2);
+  box-shadow: 0 10px 22px rgba(202, 255, 195, 0.2);
 }
+
+.file-info { display: flex; flex-direction: column; gap: 8px; }
 
 .file-info p {
-  margin: 10px 0;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.file-info i {
-  width: 20px;
-}
+.file-info i { width: 16px; color: #caffc3; }
 
-@media (max-width: 900px) {
+/* RESPONSIVE MÓVIL EXTENDIDO */
+@media (max-width: 768px) {
+  .mod-detalle-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 16px;
+  }
+
+  .mod-header-main h1 { font-size: 1.5rem; }
+
+  .mod-header-stats {
+    flex-direction: row;
+    gap: 24px;
+  }
+
   .mod-detalle-grid {
     grid-template-columns: 1fr;
   }
 
-  .mod-detalle-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-  }
+  .mod-info-lateral { order: -1; }
+
+  .mod-meta { gap: 10px; font-size: 0.8rem; flex-wrap: wrap; }
+
+  .glass-section { padding: 18px; }
+
+  .comentario-form { padding: 14px; }
+
+  .rating-input { flex-wrap: wrap; gap: 8px; }
+
+  .btn-back { font-size: 0.8rem; padding: 7px 13px; }
+}
+
+@media (max-width: 430px) {
+  .mod-header-main h1 { font-size: 1.3rem; }
+  .glass-section { padding: 14px; }
+  .comentario-form textarea { min-height: 70px; }
 }

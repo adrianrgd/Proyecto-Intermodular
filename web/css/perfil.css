@@ -444,3 +444,60 @@ h4 {
     transform: translateY(0);
   }
 }
+
+/* RESPONSIVE MÓVIL */
+@media (max-width: 768px) {
+  .perfil-container {
+    margin: 76px 12px 32px;
+    border-radius: 16px;
+  }
+
+  .perfil-banner { height: 130px; }
+
+  .header-info-container {
+    flex-wrap: wrap;
+    margin-top: -48px;
+    gap: 14px;
+  }
+
+  .avatar-grande { width: 100px; height: 100px; }
+
+  .user-main-info h1 { font-size: 1.4rem; }
+  .user-handle       { font-size: 0.9rem; }
+
+  .header-actions { width: 100%; }
+  .btn-action-outline { width: 100%; text-align: center; }
+
+  .perfil-nav-tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+    flex-wrap: nowrap;
+  }
+
+  .tab-btn { font-size: 0.85rem; padding: 12px 14px; white-space: nowrap; }
+
+  .perfil-grid {
+    flex-direction: column;
+    padding: 16px;
+    gap: 20px;
+  }
+
+  .perfil-col-lateral { width: 100%; }
+
+  .mini-stats { grid-template-columns: 1fr 1fr; }
+
+  .mods-feed,
+  .valoraciones-feed { width: 100%; }
+
+  .mod-item-social,
+  .valoracion-social-card { max-width: 100%; padding: 16px; }
+}
+
+@media (max-width: 430px) {
+  .perfil-container { margin: 72px 8px 24px; }
+  .perfil-header    { padding: 0 16px 16px; }
+  .avatar-grande    { width: 84px; height: 84px; }
+  .user-main-info h1 { font-size: 1.2rem; }
+  .tab-btn          { font-size: 0.78rem; padding: 10px 10px; }
+}

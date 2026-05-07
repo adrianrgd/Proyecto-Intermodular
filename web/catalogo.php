@@ -33,7 +33,6 @@ if ($id_juego_sel) {
         }
     }
 } else {
-    // Si no hay juego seleccionado, mostrar los mods más populares
     $sql_mods = "SELECT r.*, u.nickname as autor, v.nombre_juego,
                  (SELECT AVG(puntuacion) FROM VALORACION v2 WHERE v2.id_recurso = r.id_recurso) as media_valoracion
                  FROM RECURSO r 
@@ -46,6 +45,7 @@ if ($id_juego_sel) {
     }
 }
 
+$vista = $id_juego_sel ? 'mods' : 'juegos';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -76,73 +76,136 @@ if ($id_juego_sel) {
         </nav>
     </header>
 
-    <main class="catalogo-container">
-        <!-- Sidebar de Juegos -->
-        <aside class="catalogo-sidebar">
-            <h3><i class="fa-solid fa-gamepad"></i> Juegos</h3>
-            <div class="lista-juegos">
-                <a href="catalogo.php" class="juego-item <?php echo !$id_juego_sel ? 'active' : ''; ?>" data-juego="">
-                    Todos los Juegos
-                </a>
-                <?php foreach ($juegos as $juego): ?>
-                    <a href="catalogo.php?juego=<?php echo $juego['id_videojuego']; ?>" 
-                       class="juego-item <?php echo $id_juego_sel == $juego['id_videojuego'] ? 'active' : ''; ?>"
-                       data-juego="<?php echo $juego['id_videojuego']; ?>"
-                       data-nombre="<?php echo htmlspecialchars($juego['nombre_juego']); ?>">
-                        <?php echo htmlspecialchars($juego['nombre_juego']); ?>
-                    </a>
-                <?php endforeach; ?>
+    <main class="catalogo-wrapper">
 
-            </div>
-        </aside>
-
-        <!-- Feed de Contenido -->
-        <section class="catalogo-feed">
-            <div class="feed-header">
-                <div class="feed-fixer">
-                    <h2 id="feed-title"><?php echo $id_juego_sel ? "Mods para " . htmlspecialchars($nombre_juego_sel) : "Los más populares"; ?></h2>
-                </div>
+        <!-- ASIDE: Filtros + Búsqueda -->
+        <aside class="catalogo-aside">
+            <div class="aside-section">
+                <h3 class="aside-title"><i class="fa-solid fa-magnifying-glass"></i> Buscar</h3>
                 <div class="search-bar">
-                    <i class="fa-solid fa-magnifying-glass"></i>
                     <input type="text" placeholder="Buscar mods..." id="search-input">
                 </div>
             </div>
 
-            <div class="mods-grid" id="mods-grid">
-                <?php if (empty($mods)): ?>
-                    <div class="empty-state">
-                        <i class="fa-solid fa-ghost"></i>
-                        <p>No hay mods disponibles en este momento.</p>
-                    </div>
-                <?php else: ?>
-                    <?php foreach ($mods as $mod): ?>
-                        <div class="mod-card">
-                            <div class="mod-card-header">
-                                <span class="mod-game-label"><?php echo htmlspecialchars($mod['nombre_juego']); ?></span>
-                                <span class="mod-author">por <?php echo htmlspecialchars($mod['autor']); ?></span>
-                            </div>
+            <div class="aside-section">
+                <h3 class="aside-title"><i class="fa-solid fa-gamepad"></i> Juegos</h3>
+                <nav class="lista-juegos">
+                    <a href="catalogo.php"
+                       class="juego-item <?php echo !$id_juego_sel ? 'active' : ''; ?>"
+                       data-juego="">
+                        <i class="fa-solid fa-fire-flame-curved"></i>
+                        <span>Todos los Juegos</span>
+                    </a>
+                    <?php foreach ($juegos as $juego): ?>
+                        <a href="catalogo.php?juego=<?php echo $juego['id_videojuego']; ?>"
+                           class="juego-item <?php echo $id_juego_sel == $juego['id_videojuego'] ? 'active' : ''; ?>"
+                           data-juego="<?php echo $juego['id_videojuego']; ?>"
+                           data-nombre="<?php echo htmlspecialchars($juego['nombre_juego']); ?>">
+                            <i class="fa-solid fa-chevron-right"></i>
+                            <span><?php echo htmlspecialchars($juego['nombre_juego']); ?></span>
+                        </a>
+                    <?php endforeach; ?>
+                </nav>
+            </div>
+        </aside>
 
-                            <h3><?php echo htmlspecialchars($mod['nombre_rec']); ?></h3>
-                            <p class="mod-desc"><?php echo htmlspecialchars($mod['descripcion']); ?></p>
-                            <div class="mod-card-footer">
-                                <div class="mod-stats">
-                                    <span id="num_descargas-<?php echo $mod['id_recurso']; ?>">
-                                        <i class="fa-solid fa-download"></i> <?php echo $mod['num_descargas']; ?>
-                                    </span>
-                                    <span id="media_valoracion-<?php echo $mod['id_recurso']; ?>">
-                                        <i class="fa-solid fa-star"></i> <?php echo $mod['media_valoracion'] ? number_format($mod['media_valoracion'], 1) : '0.0'; ?>
-                                    </span>
+        <!-- CONTENIDO PRINCIPAL -->
+        <section class="catalogo-content">
+
+            <!-- Título encima del grid -->
+            <div class="content-header">
+                <h2 class="content-title">
+                    <?php if ($id_juego_sel): ?>
+                        <span class="title-label">Mods para</span>
+                        <?php echo htmlspecialchars($nombre_juego_sel); ?>
+                    <?php else: ?>
+                        <span class="title-label">Explorar</span>
+                        Lo más popular
+                    <?php endif; ?>
+                </h2>
+                <span class="content-count">
+                    <?php echo count($mods); ?> resultado<?php echo count($mods) !== 1 ? 's' : ''; ?>
+                </span>
+            </div>
+
+            <!-- GRID según vista -->
+            <?php if ($vista === 'juegos'): ?>
+                <!-- Vista: todos los juegos → 1 columna -->
+                <div class="juegos-grid" id="mods-grid">
+                    <?php if (empty($mods)): ?>
+                        <div class="empty-state">
+                            <i class="fa-solid fa-ghost"></i>
+                            <p>No hay mods disponibles en este momento.</p>
+                        </div>
+                    <?php else: ?>
+                        <?php foreach ($mods as $mod): ?>
+                            <div class="mod-row-card">
+                                <div class="mod-row-info">
+                                    <div class="mod-row-meta">
+                                        <span class="mod-game-label"><?php echo htmlspecialchars($mod['nombre_juego']); ?></span>
+                                        <span class="mod-author">por <?php echo htmlspecialchars($mod['autor']); ?></span>
+                                    </div>
+                                    <h3><?php echo htmlspecialchars($mod['nombre_rec']); ?></h3>
+                                    <p class="mod-desc"><?php echo htmlspecialchars($mod['descripcion']); ?></p>
                                 </div>
-                                <div class="mod-card-actions">
+                                <div class="mod-row-aside">
+                                    <div class="mod-stats">
+                                        <span id="num_descargas-<?php echo $mod['id_recurso']; ?>">
+                                            <i class="fa-solid fa-download"></i>
+                                            <?php echo $mod['num_descargas']; ?>
+                                        </span>
+                                        <span id="media_valoracion-<?php echo $mod['id_recurso']; ?>">
+                                            <i class="fa-solid fa-star"></i>
+                                            <?php echo $mod['media_valoracion'] ? number_format($mod['media_valoracion'], 1) : '0.0'; ?>
+                                        </span>
+                                    </div>
                                     <button class="btn-view" onclick="verDetallesMod(<?php echo $mod['id_recurso']; ?>)">
-                                        <i class="fa-solid fa-eye"></i>
+                                        <i class="fa-solid fa-eye"></i> Ver
                                     </button>
                                 </div>
                             </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+
+            <?php else: ?>
+                <!-- Vista: mods de un juego → 4 columnas fijas -->
+                <div class="mods-grid" id="mods-grid">
+                    <?php if (empty($mods)): ?>
+                        <div class="empty-state">
+                            <i class="fa-solid fa-ghost"></i>
+                            <p>No hay mods para este juego todavía.</p>
                         </div>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-            </div>
+                    <?php else: ?>
+                        <?php foreach ($mods as $mod): ?>
+                            <div class="mod-card">
+                                <div class="mod-card-header">
+                                    <span class="mod-game-label"><?php echo htmlspecialchars($mod['nombre_juego']); ?></span>
+                                    <span class="mod-author">por <?php echo htmlspecialchars($mod['autor']); ?></span>
+                                </div>
+                                <h3><?php echo htmlspecialchars($mod['nombre_rec']); ?></h3>
+                                <p class="mod-desc"><?php echo htmlspecialchars($mod['descripcion']); ?></p>
+                                <div class="mod-card-footer">
+                                    <div class="mod-stats">
+                                        <span id="num_descargas-<?php echo $mod['id_recurso']; ?>">
+                                            <i class="fa-solid fa-download"></i> <?php echo $mod['num_descargas']; ?>
+                                        </span>
+                                        <span id="media_valoracion-<?php echo $mod['id_recurso']; ?>">
+                                            <i class="fa-solid fa-star"></i> <?php echo $mod['media_valoracion'] ? number_format($mod['media_valoracion'], 1) : '0.0'; ?>
+                                        </span>
+                                    </div>
+                                    <div class="mod-card-actions">
+                                        <button class="btn-view" onclick="verDetallesMod(<?php echo $mod['id_recurso']; ?>)">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+            <?php endif; ?>
+
         </section>
     </main>
 
