@@ -192,6 +192,14 @@
   color: #555;
 }
 
+.star {
+    color: #ffc107 !important;
+}
+
+.fa-star.fa-regular {
+    color: rgba(255, 255, 255, 0.2);
+}
+
 .star-opt {
   cursor: pointer;
   transition: transform 0.15s, color 0.15s;
@@ -334,6 +342,8 @@
   align-items: center;
   gap: 10px;
 }
+
+
 
 .file-info i { width: 16px; color: #caffc3; }
 

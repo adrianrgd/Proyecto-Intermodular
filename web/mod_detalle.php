@@ -28,9 +28,10 @@ if (!$mod) {
 }
 
 // Obtener comentarios
-$sql_comentarios = "SELECT c.*, u.nickname, u.foto_perfil 
+$sql_comentarios = "SELECT c.*, u.nickname, u.foto_perfil, val.puntuacion 
                     FROM COMENTARIO c 
                     JOIN USUARIO u ON c.id_usuario = u.id_usuario 
+                    LEFT JOIN VALORACION val ON (val.id_recurso = c.id_recurso AND val.id_usuario = c.id_usuario)
                     WHERE c.id_recurso = ? 
                     ORDER BY c.fecha DESC";
 $stmt_com = $conn->prepare($sql_comentarios);
@@ -120,26 +121,35 @@ $media = $mod['media_valoracion'] ? number_format($mod['media_valoracion'], 1) :
                     <p class="login-msg">Debes <a href="login.php">iniciar sesión</a> para comentar y valorar.</p>
                 <?php endif; ?>
 
-                <div class="comentarios-list">
-                    <?php if (empty($comentarios)): ?>
-                        <p class="no-comments">Aún no hay comentarios. ¡Sé el primero!</p>
-                    <?php else: ?>
-                        <?php foreach ($comentarios as $com): ?>
-                            <div class="comentario-item">
-                                <img src="<?php echo !empty($com['foto_perfil']) ? htmlspecialchars($com['foto_perfil']) : 'img/FotoPerfilPredeterminada.png'; ?>" alt="User" class="mini-avatar">
-                                <div class="com-content">
-                                    <div class="com-header">
-                                        <strong><?php echo htmlspecialchars($com['nickname']); ?></strong>
-                                        <span><?php echo date("d/m/Y H:i", strtotime($com['fecha'])); ?></span>
+                <div class="comentarios-lista">
+                            <?php if (empty($comentarios)): ?>
+                                <p>No hay comentarios aún.</p>
+                            <?php else: ?>
+                                <?php foreach ($comentarios as $com): ?>
+                                    <div class="comentario-item">
+                                        <img src="<?php echo !empty($com['foto_perfil']) ? htmlspecialchars($com['foto_perfil']) : 'img/FotoPerfilPredeterminada.png'; ?>" alt="User" class="mini-avatar">
+                                        <div class="com-content">
+                                            <div class="com-header">
+                                                <strong><?php echo htmlspecialchars($com['nickname']); ?></strong>
+                                                
+                                                <div class="com-stars">
+                                                    <?php 
+                                                    $puntos = isset($com['puntuacion']) ? intval($com['puntuacion']) : 0;
+                                                    for ($i = 1; $i <= 5; $i++): ?>
+                                                        <i class="fa-star <?php echo ($i <= $puntos) ? 'fa-solid star' : 'fa-regular'; ?>"></i>
+                                                    <?php endfor; ?>
+                                                </div>
+
+                                                <span><?php echo date("d/m/Y H:i", strtotime($com['fecha'])); ?></span>
+                                            </div>
+                                            <p><?php echo nl2br(htmlspecialchars($com['comentario'])); ?></p>
+                                        </div>
                                     </div>
-                                    <p><?php echo nl2br(htmlspecialchars($com['comentario'])); ?></p>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </div>
-            </div>
-        </section>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </section>
 
         <aside class="mod-info-lateral">
             <div class="glass-section">
