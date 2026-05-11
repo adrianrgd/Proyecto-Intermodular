@@ -181,9 +181,3 @@ Password: mysql
 
 **Adrián Rangel** — Proyecto Intermodular DAW  
 📅 Mayo 2026
-
----
-
-<p align="center">
-  Hecho con ❤️ para la comunidad del modding
-</p>
