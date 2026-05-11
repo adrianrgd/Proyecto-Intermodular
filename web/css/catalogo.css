@@ -142,6 +142,16 @@
   gap: 12px;
   padding-bottom: 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: aparecerSuave 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes aparecerSuave {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .content-title {
@@ -237,6 +247,9 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   width: 100%;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: aparecerSuave 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
 /* MOD CARD */

@@ -1,8 +1,8 @@
 package com.modvalley.view;
 
-import com.modvalley.model.*;
-import com.modvalley.controller.*;
 import com.modvalley.Custom;
+import com.modvalley.controller.*;
+import com.modvalley.model.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
