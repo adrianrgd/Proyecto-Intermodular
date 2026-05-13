@@ -6,14 +6,6 @@ ModValley nace de la necesidad de tener un único lugar donde la comunidad pueda
 
 ---
 
-## 📸 Vista Previa
-
-| Login | Catálogo | Perfil |
-|-------|----------|--------|
-| Selección de usuario y registro | Exploración de mods por juego | Historial, mods y ajustes |
-
----
-
 ## 🧱 Arquitectura del Proyecto
 
 El proyecto está dividido en **dos aplicaciones** que comparten la misma base de datos MySQL:
@@ -24,22 +16,22 @@ Proyecto-Intermodular-DAW/
 │   └── src/com/modvalley/
 │       ├── config/         # Conexión JDBC
 │       ├── controller/     # Lógica de negocio
-│       ├── dao/            # Acceso a datos (patrón DAO)
+│       ├── dao/            # Acceso a datos
 │       ├── model/          # Entidades
 │       └── view/           # Interfaz de consola
 │
 ├── web/                    # Interfaz web (PHP + CSS + JS)
 │   ├── Config/             # Configuración de BD
 │   ├── php/API/            # Endpoints AJAX
-│   ├── css/                # Estilos por página
-│   └── js/                 # Scripts del cliente
+│   ├── css/                # Estilos
+│   └── js/                 # Scripts
 │
 ├── sql/                    # Scripts de base de datos
 │   └── Tablas/
 │       ├── CreacionTablas.sql
 │       └── InsercionDatos.sql
 │
-└── docs/                   # Documentación técnica
+└── docs/                   # Documentación
 ```
 
 ---
