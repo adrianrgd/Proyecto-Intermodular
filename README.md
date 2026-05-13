@@ -53,12 +53,12 @@ Proyecto-Intermodular-DAW/
 - Eliminar mods propios con confirmación
 - Los mods publicados aparecen en el catálogo al instante
 
-### 💬 Interacción Comunitaria
+### Interacción 
 - Sistema de valoraciones de 1 a 5 estrellas
 - Comentarios por mod, con nombre de usuario y fecha
 - Visualización de todas las opiniones en el detalle del mod
 
-### 👤 Perfil de Usuario
+### Perfil de Usuario
 - Ver y editar nickname, nombre, biografía y foto de perfil
 - Historial de mods publicados con estadísticas de descargas
 - Historial de valoraciones y reseñas propias
@@ -70,29 +70,15 @@ Proyecto-Intermodular-DAW/
 
 | Capa | Tecnología |
 |------|-----------|
-| Aplicación de consola | Java 11+, JDBC, MySQL Connector/J |
-| Interfaz web | PHP 8.1, HTML5, CSS3, JavaScript (Vanilla) |
+| Aplicación de consola | Java 25, JDBC, MySQL Connector/J |
+| Interfaz web | PHP 8.1, HTML5, CSS3, JavaScript |
 | Base de datos | MySQL 8.0 |
 | Servidor web | Apache 2.4 |
-| Estilos | CSS variables, Flexbox, Grid, `backdrop-filter` |
 | Iconos | Font Awesome 6 |
-| Tipografía | Google Fonts — Lexend |
 
 ---
 
 ## 🗄️ Base de Datos
-
-Diseño relacional normalizado a **3NF** con 6 tablas principales:
-
-```
-USUARIO ──< RECURSO >── VIDEOJUEGO
-              │
-              │──< COMENTARIO >── USUARIO
-              │
-              └──< VALORACION >── USUARIO
-
-CATEGORIA ──< RECURSO
-```
 
 | Tabla | Descripción |
 |-------|-------------|
@@ -105,65 +91,12 @@ CATEGORIA ──< RECURSO
 
 ---
 
-## 🚀 Instalación y Ejecución
-
-### Requisitos previos
-- Java 11+
-- MySQL 8.0+
-- Apache + PHP 8.1 (o XAMPP/LAMPP)
-
-### 1. Configurar la base de datos
-
-```bash
-mysql -u root -p < sql/Tablas/CreacionTablas.sql
-mysql -u root -p modvalley < sql/Tablas/InsercionDatos.sql
-```
-
-### 2. Aplicación de consola (Java)
-
-```bash
-cd app
-javac -d bin -cp lib/* src/com/modvalley/**/*.java
-java -cp bin:lib/* com.modvalley.Main
-```
-
-> Ajusta las credenciales en `app/src/com/modvalley/config/Conexion.java` si es necesario.
-
-### 3. Interfaz web (PHP)
-
-Copia la carpeta `web/` a tu directorio raíz de Apache:
-
-```
-# XAMPP (Windows)
-C:\xampp\htdocs\web\
-
-# LAMPP (Linux)
-/opt/lampp/htdocs/web/
-```
-
-Accede en el navegador: `http://localhost/web/login.php`
-
-> Ajusta las credenciales en `web/Config/db.php`.
-
----
-
-## 📁 Datos de Conexión por Defecto
-
-```
-Host:     localhost:3306
-BD:       modvalley
-Usuario:  root
-Password: mysql
-```
-
----
-
 ## 📖 Documentación
 
 | Documento | Descripción |
 |-----------|-------------|
 | [`docs/README_PROGRAMACION.md`](docs/README_PROGRAMACION.md) | Guía técnica de la app Java |
-| [`docs/README_LDM.md`](docs/README_LDM.md) | Guía de la interfaz web PHP |
+| [`docs/README_LDM.md`](docs/README_LDM.md) | Guía de la interfaz web |
 | [`docs/DISEÑO_BBDD.md`](docs/DISEÑO_BBDD.md) | Diseño y normalización de la base de datos |
 | [`docs/INFORME_ENTORNO_EJECUCION.md`](docs/INFORME_ENTORNO_EJECUCION.md) | Guía de instalación en servidor y seguridad |
 
@@ -172,4 +105,3 @@ Password: mysql
 ## 👨‍💻 Autor
 
 **Adrián Rangel** — Proyecto Intermodular DAW  
-📅 Mayo 2026
