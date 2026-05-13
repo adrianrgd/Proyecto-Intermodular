@@ -1,19 +1,18 @@
 # Diseño de Base de Datos ModValley
 
-## 📊 Descripción General
+## Descripción General
 
 La base de datos **ModValley** está diseñada siguiendo el modelo **Entidad-Relación (E-R)** con normalización hasta la **Tercera Forma Normal (3NF)**. Utiliza un enfoque relacional estructurado para gestionar recursos de videojuegos, usuarios, interacciones comunitarias y metadatos.
 
 ### Características principales:
-- **Tipo de BD:** MySQL Relacional
 - **Normalización:** 3NF (Tercera Forma Normal)
 - **Total de tablas:** 6 tablas principales
-- **Relaciones:** 9 relaciones (Foreign Keys)
-- **Integridad referencial:** Sí (mediante FOREIGN KEY)
+- **Relaciones:** 9 relaciones
+- **Integridad referencial:** Sí (mediante FK)
 
 ---
 
-## 📋 Entidades y Cardinalidades
+## Entidades y Cardinalidades
 
 ### 1. **USUARIO** (Entidad Independiente)
 
@@ -21,9 +20,9 @@ La base de datos **ModValley** está diseñada siguiendo el modelo **Entidad-Rel
 
 | Campo | Tipo | Restricción | Descripción |
 |-------|------|-------------|-------------|
-| `id_usuario` | INT | PK, AUTO_INCREMENT | Identificador único |
+| `id_usuario` | INT | PK, AUTO_INCREMENT | Id |
 | `nickname` | VARCHAR(50) | NOT NULL | Nombre de usuario único |
-| `nombre` | VARCHAR(100) | DEFAULT NULL | Nombre completo |
+| `nombre` | VARCHAR(100) | DEFAULT NULL | Nombre |
 | `email` | VARCHAR(100) | UNIQUE, NOT NULL | Correo electrónico |
 | `fecha_registro` | DATE | DEFAULT CURRENT_DATE | Fecha de registro |
 | `biografia` | TEXT | DEFAULT 'Sin Biografía' | Descripción del perfil |
@@ -48,11 +47,8 @@ La base de datos **ModValley** está diseñada siguiendo el modelo **Entidad-Rel
 **Valores típicos:** 
 - Mods
 - Texturas
-- Soundtracks
-- Gráficos
-- Skins
+- Herramientas
 - Mapas
-- Scripts
 
 **Cardinalidades de CATEGORIA:**
 - **CATEGORIA (1) → (N) RECURSO** - Una categoría contiene múltiples recursos
@@ -65,10 +61,10 @@ La base de datos **ModValley** está diseñada siguiendo el modelo **Entidad-Rel
 
 | Campo | Tipo | Restricción | Descripción |
 |-------|------|-------------|-------------|
-| `id_videojuego` | INT | PK, AUTO_INCREMENT | Identificador único |
+| `id_videojuego` | INT | PK, AUTO_INCREMENT | Id |
 | `nombre_juego` | VARCHAR(100) | NOT NULL | Nombre del juego |
-| `genero` | VARCHAR(50) | NOT NULL | Género (RPG, FPS, etc.) |
-| `plataforma` | VARCHAR(50) | NOT NULL | Plataforma (PC, PS5, etc.) |
+| `genero` | VARCHAR(50) | NOT NULL | Género |
+| `plataforma` | VARCHAR(50) | NOT NULL | Plataforma |
 
 **Ejemplos de datos:**
 - Skyrim (RPG, PC/Consolas)
@@ -86,11 +82,11 @@ La base de datos **ModValley** está diseñada siguiendo el modelo **Entidad-Rel
 
 | Campo | Tipo | Restricción | Descripción |
 |-------|------|-------------|-------------|
-| `id_recurso` | INT | PK, AUTO_INCREMENT | Identificador único |
+| `id_recurso` | INT | PK, AUTO_INCREMENT | Id |
 | `nombre_rec` | VARCHAR(100) | NOT NULL | Nombre del recurso |
-| `descripcion` | TEXT | NOT NULL | Descripción detallada |
+| `descripcion` | TEXT | NOT NULL | Descripción |
 | `version` | VARCHAR(20) | NOT NULL | Versión del recurso |
-| `num_descargas` | INT | DEFAULT 0 | Contador de descargas |
+| `num_descargas` | INT | DEFAULT 0 | Descargas |
 | `fecha_subida` | DATE | DEFAULT CURRENT_DATE | Fecha de creación |
 | `id_usuario` | INT | FK → USUARIO | Quién subió el recurso |
 | `id_videojuego` | INT | FK → VIDEOJUEGO | Videojuego asociado |
@@ -111,7 +107,7 @@ La base de datos **ModValley** está diseñada siguiendo el modelo **Entidad-Rel
 
 | Campo | Tipo | Restricción | Descripción |
 |-------|------|-------------|-------------|
-| `id_comentario` | INT | PK, AUTO_INCREMENT | Identificador único |
+| `id_comentario` | INT | PK, AUTO_INCREMENT | Id |
 | `comentario` | TEXT | NOT NULL | Contenido del comentario |
 | `fecha` | DATE | DEFAULT CURRENT_DATE | Fecha de comentario |
 | `id_usuario` | INT | FK → USUARIO | Quién comenta |
@@ -129,7 +125,7 @@ La base de datos **ModValley** está diseñada siguiendo el modelo **Entidad-Rel
 
 | Campo | Tipo | Restricción | Descripción |
 |-------|------|-------------|-------------|
-| `id_valoracion` | INT | PK, AUTO_INCREMENT | Identificador único |
+| `id_valoracion` | INT | PK, AUTO_INCREMENT | Id |
 | `puntuacion` | INT | CHECK (1-5), NOT NULL | Calificación de 1 a 5 |
 | `id_usuario` | INT | FK → USUARIO | Quién valora |
 | `id_recurso` | INT | FK → RECURSO | Recurso valorado |
@@ -187,7 +183,7 @@ VALORACION.id_recurso    → RECURSO.id_recurso
 
 ---
 
-## 🎯 Integridad Referencial
+## Integridad
 
 ### Restricciones implementadas:
 1. **No hay eliminación en cascada** - Las referencias se mantienen intactas
@@ -203,7 +199,7 @@ VALORACION.id_recurso    → RECURSO.id_recurso
 
 ---
 
-## 📊 Análisis de Normalización
+## Normalización
 
 ### Objetivo: Tercera Forma Normal (3NF)
 
@@ -230,7 +226,7 @@ VALORACION.id_recurso    → RECURSO.id_recurso
 
 ---
 
-## 💾 Flujo de Datos
+## Flujo de Datos
 
 ### Caso de uso: Usuario descarga un mod
 
@@ -268,21 +264,7 @@ VALORACION.id_recurso    → RECURSO.id_recurso
 
 ---
 
-## 🔄 Relaciones Inversas (Lectura desde el otro lado)
-
-| Desde | Hacia | Cardinalidad Inversa |
-|-------|-------|----------------------|
-| RECURSO | USUARIO | N:1 (muchos recursos de 1 usuario) |
-| RECURSO | CATEGORIA | N:1 (muchos recursos en 1 categoría) |
-| RECURSO | VIDEOJUEGO | N:1 (muchos recursos del 1 videojuego) |
-| COMENTARIO | USUARIO | N:1 (muchos comentarios de 1 usuario) |
-| COMENTARIO | RECURSO | N:1 (muchos comentarios en 1 recurso) |
-| VALORACION | USUARIO | N:1 (muchas valoraciones de 1 usuario) |
-| VALORACION | RECURSO | N:1 (muchas valoraciones de 1 recurso) |
-
----
-
-## 🎓 Ejemplos de Consultas por Cardinalidad
+## Consultas por Cardinalidad
 
 ### Relación USUARIO → RECURSO (1:N)
 ```sql
@@ -331,7 +313,7 @@ GROUP BY r.id_recurso;
 
 ---
 
-## 📝 Mejoras Futuras
+## Mejoras Futuras
 
 ### Tablas que podrían agregarse:
 

@@ -20,10 +20,10 @@ Sirve para tener un lugar centralizado donde poder encontrar y descargar recurso
 
 ---
 
-## 🚀 Cómo se ejecuta
+## ¿Cómo se ejecuta?
 
 ### Requisitos previos
-- **Java**: JDK 8 o superior
+- **Java**: JDK 17 o superior
 - **MySQL**: MySQL Server 5.7 o superior
 - **Base de datos**: Crear la base de datos `modvalley` usando los scripts SQL
 
@@ -53,31 +53,26 @@ Sirve para tener un lugar centralizado donde poder encontrar y descargar recurso
 
 ---
 
-## ✨ Funcionalidades principales
+## Funcionalidades
 
 ### 1. **Autenticación de Usuarios**
-- Inicio de sesión seguro
+- Inicio de sesión por seleccion.
 - Registro de nuevos usuarios
-- Gestión de credenciales
 
 ### 2. **Catálogo de Recursos**
-- Explorar todos los mods y recursos disponibles
+- Explorarion de recursos
 - Filtrar recursos por videojuego
-- Filtrar recursos por categoría
-- Buscar recursos específicos
 - Ver detalles de cada recurso
 - Descargar recursos
 
-### 3. **Gestión de Contenido Personal**
+### 3. **Gestión**
 - Subir nuevos recursos (mods, texturas, etc.)
-- Editar recursos propios
 - Eliminar recursos propios
 - Asignar categoría y videojuego a cada recurso
-- Administrar archivos personales
 
-### 4. **Interacción Comunitaria**
+### 4. **Interacción**
 - Dejar comentarios en recursos
-- Valorar y calificar recursos
+- Calificar recursos
 - Ver valoraciones de otros usuarios
 - Leer comentarios de otros usuarios
 
@@ -87,22 +82,18 @@ Sirve para tener un lugar centralizado donde poder encontrar y descargar recurso
 - Actualizar biografía
 - Cambiar foto de perfil
 - Ver historial de descargas
-- Ver recursos subidos propios
-
-### 6. **Estadísticas y Gestión**
-- Ver valoraciones promedio de recursos
-- Registrar descargas de recursos
-- Información de usuarios creadores
+- Ver recursos subidos
 
 ---
 
-## 📦 Entidades que gestiona
+## Entidades que gestiona
 
 La aplicación maneja las siguientes entidades principales:
 
 ### **1. Usuario**
 - `idUsuario`: Identificador único
 - `nickname`: Nombre de usuario
+- *`nombre`: No tiene funcionalidad en la version Java, pero si en la version Web*
 - `email`: Correo electrónico
 - `fecha_registro`: Fecha de registro
 - `biografía`: Descripción del perfil
@@ -127,7 +118,7 @@ La aplicación maneja las siguientes entidades principales:
 - Videojuego asociado
 - Usuario creador
 - Fecha de creación
-- Archivo descargable
+- Descargas
 
 **Acciones:**
 - Crear, editar, eliminar recursos
@@ -161,18 +152,9 @@ La aplicación maneja las siguientes entidades principales:
 
 **Relación:** Vincula usuarios y recursos con ratings
 
-### **7. Descarga**
-- `idDescarga`: Identificador único
-- Usuario descargador
-- Recurso descargado
-- Fecha de descarga
-- Número de descargas por recurso
-
-**Relación:** Registra el historial de descargas
-
 ---
 
-## 🗄️ Integración con Base de Datos
+## Integración BBDD
 
 La aplicación utiliza MySQL para la persistencia de datos. El acceso a la base de datos se realiza mediante el patrón **DAO (Data Access Object)**:
 
@@ -193,9 +175,6 @@ La aplicación utiliza MySQL para la persistencia de datos. El acceso a la base 
 - **Actualización:** Editar perfil, modificar recursos, actualizar valoraciones
 - **Eliminación:** Eliminar recursos, eliminar comentarios, desactivar usuarios
 - **Consultas complejas:** Filtrar por categoría/juego, obtener estadísticas
-
-### Esquema de base de datos:
-Consulta `sql/Estructura_BBDD_ModValley.md` para ver el diagrama entidad-relación completo.
 
 ---
 
@@ -248,16 +227,6 @@ sql/                             # Scripts de base de datos
 
 docs/                            # Documentación
 ```
-
----
-
-## 👨‍💻 Tecnologías utilizadas
-
-- **Lenguaje:** Java 8+
-- **Base de datos:** MySQL 5.7+
-- **Arquitectura:** MVC (Model-View-Controller) con patrón DAO
-- **Interfaz:** Aplicación de consola + Web alternativa (PHP)
-- **Conector JDBC:** MySQL Connector/J
 
 ---
 
